@@ -21,7 +21,7 @@ jobs:
         run: pip install requests pandas
 
       - name: Script draaien
-        run: python collector.py
+        run: python scheduling_AH.py
 
       - name: Data opslaan in de repo
         run: |
