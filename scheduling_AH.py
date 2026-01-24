@@ -61,4 +61,4 @@ if items:
         df = new_df
         
     df.to_csv(CSV_FILE, index=False)
-    print(f"✅ {len(items)} items toegevoegd aan de historie.")
+    print(f" {len(items)} items toegevoegd aan de historie.")
