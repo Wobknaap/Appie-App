@@ -1,0 +1,31 @@
+name: AH Koopjes Collector
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"  # Draait elke 20 minuten
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code ophalen
+        uses: actions/checkout@v3
+
+      - name: Python instellen
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Libraries installeren
+        run: pip install requests pandas
+
+      - name: Script draaien
+        run: python collector.py
+
+      - name: Data opslaan in de repo
+        run: |
+          git config --global user.name 'BargainBot'
+          git config --global user.email 'bot@ah-tracker.com'
+          git add koopjes_historie.csv
+          git commit -m "Update koopjes data" || exit 0
+          git push
