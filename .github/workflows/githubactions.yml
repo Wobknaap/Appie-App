@@ -2,8 +2,10 @@ name: AH Koopjes Collector
 
 on:
   schedule:
-    - cron: "*/20 * * * *"  # Draait elke 20 minuten
-  workflow_dispatch:        # Voegt de handmatige "Start" knop toe op GitHub
+    # */20 = elke 20 minuten
+    # 7-20 = tussen 07:00 en 20:40 UTC (dit is 08:00 - 21:40 in Nederland)
+    - cron: "*/20 7-20 * * *"
+  workflow_dispatch:        # Houdt de handmatige knop ook beschikbaar
 
 jobs:
   build:
@@ -30,3 +32,4 @@ jobs:
           git add koopjes_historie.csv
           git commit -m "Update koopjes data" || exit 0
           git push
+          
