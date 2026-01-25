@@ -82,10 +82,10 @@ else:
     st.error("Geen data gevonden voor deze winkel. De bak is waarschijnlijk leeg!")
 
 # Historie Sectie (Data Science!)
-if os.path.exists("koopjes_historie.csv"):
+if os.path.exists("https://raw.githubusercontent.com/Wobknaap/Appie-App/refs/heads/main/koopjes_historie.csv"):
     st.divider()
     st.subheader("📈 Historische Patronen (Data Science)")
-    hist_df = pd.read_csv("koopjes_historie.csv")
+    hist_df = pd.read_csv("https://raw.githubusercontent.com/Wobknaap/Appie-App/refs/heads/main/koopjes_historie.csv")
     st.line_chart(hist_df.groupby('timestamp').size())
     st.write("Aantal gevonden koopjes over de tijd.")
 
