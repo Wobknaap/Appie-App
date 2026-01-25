@@ -5,7 +5,7 @@ on:
     # */20 = elke 20 minuten
     # 7-20 = tussen 07:00 en 20:40 UTC (dit is 08:00 - 21:40 in Nederland)
     - cron: "*/20 7-20 * * *"
-  workflow_dispatch:        # Houdt de handmatige knop ook beschikbaar
+  # workflow_dispatch:        # Houdt de handmatige knop ook beschikbaar
 
 jobs:
   build:
@@ -25,11 +25,10 @@ jobs:
       - name: Script draaien
         run: python scheduling_AH.py
 
-      - name: Data opslaan in de repo
+      - name: Data opslaan in de repod
         run: |
           git config --global user.name 'BargainBot'
           git config --global user.email 'bot@ah-tracker.com'
           git add koopjes_historie.csv
           git commit -m "Update koopjes data" || exit 0
           git push
-          
