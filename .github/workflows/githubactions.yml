@@ -2,13 +2,13 @@ name: AH Koopjes Collector
 
 on:
   schedule:
-    - cron: "*/20 7-20 * * *"
-  workflow_dispatch:
+    - cron: "*/1 7-20 * * *"
+  # workflow_dispatch:
 
 permissions:
   contents: write
 
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
