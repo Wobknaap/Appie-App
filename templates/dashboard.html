@@ -7,6 +7,7 @@
     <title>Appie Dashboard - Laatste Kans & Bonus</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
@@ -31,28 +32,44 @@
             <p>Koopjes ophalen bij de Appie...</p>
         </div>
 
+        <!-- Tab Navigation -->
+        <div id="tabs-container" style="display:none; margin-bottom: 2rem; justify-content: center; gap: 1rem;">
+            <button class="tab-button active" onclick="switchTab('massa')">🚀 Massa = Kassa</button>
+            <button class="tab-button" onclick="switchTab('double')">🔥 Double Deals</button>
+            <button class="tab-button" onclick="switchTab('kans')">🗑️ Laatste Kans</button>
+        </div>
+
         <div id="content" style="display: none;">
-            <!-- Top 3 Podium -->
-            <section class="top3-section" id="top3-section" style="display:none;">
-                <h2 style="text-align:center; font-size:2rem; margin-bottom:2rem;">🏆 Top 3 Beste Koopjes</h2>
-                <div class="podium" id="podium"></div>
-            </section>
+            <!-- Tab: Massa = Kassa -->
+            <div id="tab-massa" class="tab-content">
+                <!-- Top 3 Podium -->
+                <section class="top3-section" id="top3-section" style="display:none;">
+                    <h2 style="text-align:center; font-size:2rem; margin-bottom:2rem;">🏆 Top 3 Beste Koopjes</h2>
+                    <div class="podium" id="podium"></div>
+                </section>
 
-            <!-- Overlap Section -->
-            <section class="overlap-section">
-                <h2>🔥 Double Deals (Bonus + Laatste Kans)</h2>
-                <div class="grid" id="overlap-grid">
-                    <!-- Cards will be injected here -->
-                </div>
-            </section>
+                <!-- Ultimate Stacking Section -->
+                <section class="stacking-section" id="stacking-section" style="display:none;">
+                    <h2 style="color: #6a00ff; border-left-color: #6a00ff;">🚀 Ultimate Stacking (Massa = Kassa)</h2>
+                    <div id="stacking-container"></div>
+                </section>
+            </div>
 
-            <!-- Bargains Section -->
-            <section>
-                <h2>🗑️ Laatste Kans (Weg = Pech)</h2>
-                <div class="grid" id="bargains-grid">
-                    <!-- Cards will be injected here -->
-                </div>
-            </section>
+            <!-- Tab: Double Deals -->
+            <div id="tab-double" class="tab-content" style="display:none;">
+                <section class="overlap-section">
+                    <h2>🔥 Double Deals (Bonus + Laatste Kans)</h2>
+                    <div id="overlap-container"></div>
+                </section>
+            </div>
+
+            <!-- Tab: Laatste Kans -->
+            <div id="tab-kans" class="tab-content" style="display:none;">
+                <section>
+                    <h2>🗑️ Laatste Kans (Weg = Pech)</h2>
+                    <div id="bargains-container"></div>
+                </section>
+            </div>
         </div>
     </main>
 
@@ -65,18 +82,35 @@
             fetchData();
         });
 
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
+
+            // Show selected
+            if (tabName === 'massa') {
+                document.getElementById('tab-massa').style.display = 'block';
+                // Only show Massa button active
+                document.querySelector('button[onclick="switchTab(\'massa\')"]').classList.add('active');
+            } else if (tabName === 'double') {
+                document.getElementById('tab-double').style.display = 'block';
+                document.querySelector('button[onclick="switchTab(\'double\')"]').classList.add('active');
+            } else if (tabName === 'kans') {
+                document.getElementById('tab-kans').style.display = 'block';
+                document.querySelector('button[onclick="switchTab(\'kans\')"]').classList.add('active');
+            }
+        }
+
         async function loadStores() {
             try {
                 const response = await fetch('{{ url_for("static", filename="stores.json") }}');
                 stores = await response.json();
 
+                renderStoreOptions();
                 const select = document.getElementById('store-select');
                 const search = document.getElementById('store-search');
-
-                renderStoreOptions();
                 select.value = selectedStoreId;
 
-                // Search functionality
                 search.addEventListener('input', (e) => {
                     const searchTerm = e.target.value.toLowerCase();
                     const filtered = stores.filter(s =>
@@ -86,13 +120,12 @@
                     renderStoreOptions(filtered);
                 });
 
-                // Store selection change
                 select.addEventListener('change', (e) => {
                     selectedStoreId = e.target.value;
                     localStorage.setItem('selectedStore', selectedStoreId);
                     document.getElementById('loading').style.display = 'block';
-                    document.getElementById('loading').innerHTML = '<div class="spinner"></div><p>Koopjes ophalen voor nieuwe winkel...</p>';
                     document.getElementById('content').style.display = 'none';
+                    document.getElementById('tabs-container').style.display = 'none';
                     fetchData();
                 });
             } catch (error) {
@@ -105,9 +138,7 @@
             select.innerHTML = storeList.map(store =>
                 `<option value="${store.id}">${store.name} - ${store.city}</option>`
             ).join('');
-            if (selectedStoreId) {
-                select.value = selectedStoreId;
-            }
+            if (selectedStoreId) select.value = selectedStoreId;
         }
 
         async function fetchData() {
@@ -116,19 +147,58 @@
                 const data = await response.json();
 
                 renderTop3(data.top3);
-                renderOverlap(data.overlap);
-                renderBargains(data.bargains);
+
+                // Ultimate Stacking
+                if (data.ultimate_stacks && data.ultimate_stacks.length > 0) {
+                    document.getElementById('stacking-section').style.display = 'block';
+                    renderCategorized(data.ultimate_stacks, 'stacking-container', 'Geen stacks gevonden.');
+                } else {
+                    document.getElementById('stacking-section').style.display = 'none';
+                }
+
+                // Categorized sections
+                renderCategorized(data.overlap, 'overlap-container', 'Geen dubbele deals gevonden vandaag.');
+                renderCategorized(data.bargains, 'bargains-container', 'Geen laatste kansjes gevonden.');
 
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
+                document.getElementById('tabs-container').style.display = 'flex';
+
+                fireConfetti();
+
             } catch (error) {
-                console.error('Error fetching data:', error);
-                document.getElementById('loading').innerHTML = `<p>❌ Fout bij ophalen data: ${error.message}</p><p style="font-size:0.8em; color:#666;">Is de backend online? Check de console (F12) voor details.</p>`;
+                document.getElementById('loading').innerHTML = `<p>❌ Fout: ${error.message}</p>`;
             }
+        }
+
+        function fireConfetti() {
+            var duration = 3 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+            var interval = setInterval(function () {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                var particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random() * 0.2 + 0.1, y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random() * 0.2 + 0.7, y: Math.random() - 0.2 } }));
+            }, 250);
         }
 
         function formatPrice(price) {
             return price !== null && price !== undefined ? price.toFixed(2).replace('.', ',') : '-';
+        }
+
+        function renderStickers(item) {
+            let stickers = [];
+            if (item.discount_labels && Array.isArray(item.discount_labels)) {
+                stickers = item.discount_labels;
+            } else if (item.discount_label) {
+                stickers.push({ text: item.discount_label, type: 'bonus' });
+            } else {
+                if (item.markdownPercentage) stickers.push({ text: `-${Math.round(item.markdownPercentage)}%`, type: 'markdown' });
+                if (item.Bonus_Tekst && !stickers.some(s => s.text === item.Bonus_Tekst)) stickers.push({ text: item.Bonus_Tekst, type: 'bonus' });
+            }
+            return stickers.map(s => `<div class="sticker ${s.type || 'bonus'}">${s.text !== undefined ? s.text : s}</div>`).join('');
         }
 
         function renderTop3(items) {
@@ -139,68 +209,75 @@
                 section.style.display = 'none';
                 return;
             }
-
             section.style.display = 'block';
 
             const medals = ['🥇', '🥈', '🥉'];
-            const colors = ['#FFD700', '#C0C0C0', '#CD7F32']; // gold, silver, bronze
+            const ranks = ['gold', 'silver', 'bronze'];
 
             container.innerHTML = items.map((item, idx) => {
                 const title = item.Product || item.title;
                 const imgUrl = item.image_url || 'https://via.placeholder.com/150?text=Geen+Foto';
                 const savings = item.savings_euro || 0;
-                const finalPrice = item.final_price || 0;
                 const wasPrice = item.final_was_price || 0;
+                const finalPrice = item.final_price || 0;
+                const stickerHtml = renderStickers(item);
 
                 return `
-                    <div class="podium-item" style="border: 3px solid ${colors[idx]};">
+                    <div class="podium-item ${ranks[idx]}">
+                        <div class="podium-rank">${idx + 1}</div>
                         <div class="podium-medal">${medals[idx]}</div>
-                        <img src="${imgUrl}" alt="${title}" style="max-height:100px; max-width:100%; object-fit:contain;" loading="lazy">
-                        <h3 style="font-size:1.1rem; margin:0.5rem 0;">${title}</h3>
-                        <div style="text-align:center; margin-top:0.5rem;">
-                            <span style="text-decoration:line-through; color:#999;">€${formatPrice(wasPrice)}</span>
-                            <span style="font-size:1.5rem; font-weight:bold; color:#00a82d; margin-left:0.5rem;">€${formatPrice(finalPrice)}</span>
+                        <div class="podium-image-container">
+                            <img src="${imgUrl}" alt="${title}" loading="lazy">
                         </div>
-                        <div style="background:${colors[idx]}; color: #333; padding:0.5rem; margin-top:0.5rem; border-radius:4px; font-weight:bold;">
-                            Bespaar €${formatPrice(savings)}
+                        <h3 class="podium-title">${title}</h3>
+                        <div class="price-container" style="align-items: center; margin: 0.5rem 0;">
+                            <span class="price-was">€${formatPrice(wasPrice)}</span>
+                            <span class="price-now">€${formatPrice(finalPrice)}</span>
                         </div>
+                        <div class="stickers-container" style="display:flex; justify-content:center; gap:4px; margin-bottom: 0.5rem; flex-wrap: wrap;">
+                            ${stickerHtml}
+                        </div>
+                        <div class="savings-tag">Bespaar €${formatPrice(savings)}</div>
                     </div>
                 `;
             }).join('');
         }
 
         function createCard(item, isOverlap) {
-            // Determine fields based on item type (overlap vs bargain)
             const title = item.Product || item.title;
             const brand = item.Merk || item.brand || 'AH';
             const category = item.Categorie || item.categoryTitle || 'Diversen';
-
-            // Prices - for overlap, use final calculated prices
-            let priceNow, priceWas, stickerText;
-
+            let priceNow, priceWas;
             if (isOverlap) {
-                // Use calculated final prices for overlap
                 priceNow = item.final_price;
                 priceWas = item.final_was_price;
-                // Use smart discount label (handles "1+1 gratis" etc)
-                stickerText = item.discount_label || '';
             } else {
-                // Regular bargain item
                 priceNow = item.priceNow;
                 priceWas = item.priceWas;
-                stickerText = item.markdownPercentage ? `-${Math.round(item.markdownPercentage)}%` : '';
             }
 
-            // Fallback for sticker text
-            if (!stickerText && item.Bonus_Tekst) {
-                stickerText = item.Bonus_Tekst;
-            }
-
-            // Fallback content
+            const stickerHtml = renderStickers(item);
             const unitSize = item.salesUnitSize ? `<div class="product-meta">${item.salesUnitSize}</div>` : '';
-
-            // Image
             const imgUrl = item.image_url || 'https://via.placeholder.com/200?text=Geen+Foto';
+
+            let stockHtml = '';
+            // Only show simpler stock indicator if NOT a stack (stacks use the big badge)
+            if ((!item.stack_info || !item.stack_info.is_stack) && item.stock) {
+                stockHtml = `<div class="stock-indicator">⚠️ Nog ${item.stock} stuks!</div>`;
+            }
+
+            // Stack Info (Bundle Savings)
+            let stackInfoHtml = '';
+            if (item.stack_info && item.stack_info.is_stack) {
+                stackInfoHtml = `
+                    <div class="stack-badge" style="background:#f3eaff; color:#6a00ff; padding:0.75rem; border-radius:8px; margin-top:0.5rem; border:1px solid #d4b3ff;">
+                        <div style="font-weight:bold; font-size:1rem; margin-bottom:0.25rem;">${item.stack_info.stack_type}</div>
+                        <div style="font-size:0.9rem;">Koop ${item.stack_info.total_items}x voor <strong>€${formatPrice(item.stack_info.bundle_price)}</strong></div>
+                        <div style="font-size:0.85rem; color:#009000; font-weight:700; margin-top:0.25rem;">Jij bespaart: €${formatPrice(item.stack_info.bundle_savings)}!</div>
+                         <div style="font-size:0.75rem; color:#666; margin-top:0.25rem;">(Nog ${item.stock} op voorraad)</div>
+                    </div>
+                 `;
+            }
 
             return `
                 <div class="card">
@@ -212,34 +289,53 @@
                         <h3 class="product-title">${title}</h3>
                         <div class="product-meta">${brand}</div>
                         ${unitSize}
+                        ${stockHtml}
+                        ${stackInfoHtml}
                     </div>
                     <div class="card-footer">
                         <div class="price-container">
                             <span class="price-was">€${formatPrice(priceWas)}</span>
                             <span class="price-now">€${formatPrice(priceNow)}</span>
                         </div>
-                        <div class="sticker">${stickerText}</div>
+                        <div class="stickers-container">
+                            ${stickerHtml}
+                        </div>
                     </div>
                 </div>
             `;
         }
 
-        function renderOverlap(items) {
-            const container = document.getElementById('overlap-grid');
+        function renderCategorized(items, containerId, emptyMessage) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
             if (!items || items.length === 0) {
-                container.innerHTML = '<div class="empty-message">Geen dubbele deals gevonden vandaag.</div>';
+                container.innerHTML = `<div class="empty-message">${emptyMessage}</div>`;
                 return;
             }
-            container.innerHTML = items.map(item => createCard(item, true)).join('');
-        }
-
-        function renderBargains(items) {
-            const container = document.getElementById('bargains-grid');
-            if (!items || items.length === 0) {
-                container.innerHTML = '<div class="empty-message">Geen laatste kansjes gevonden.</div>';
-                return;
-            }
-            container.innerHTML = items.map(item => createCard(item, false)).join('');
+            const grouped = items.reduce((acc, item) => {
+                const cat = item.Categorie || item.categoryTitle || 'Overige';
+                if (!acc[cat]) acc[cat] = [];
+                acc[cat].push(item);
+                return acc;
+            }, {});
+            const sortedCategories = Object.keys(grouped).sort((a, b) => {
+                if (a === 'Overige') return 1;
+                if (b === 'Overige') return -1;
+                return a.localeCompare(b);
+            });
+            let html = '';
+            const isOverlap = containerId.includes('overlap') || containerId.includes('stacking');
+            sortedCategories.forEach(cat => {
+                html += `
+                    <div class="category-group">
+                        <h3 class="category-header">${cat} <span style="font-size:0.8em; color:#999; font-weight:400;">(${grouped[cat].length})</span></h3>
+                        <div class="grid">
+                            ${grouped[cat].map(item => createCard(item, isOverlap)).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
         }
     </script>
 </body>

@@ -299,18 +299,14 @@ def get_merged_data(store_id=None):
              print("DEBUG: 'Product' column missing in bonus data")
              print(f"DEBUG: Bonus columns: {df_bonus.columns.tolist()}")
 
-    # 4. Find Overlap (Double Deals)
+    # 4. Find Overlap (Double Deals) & Ultimate Stacking
     overlap_list = []
+    ultimate_stacks = []
+    
     if not df_bonus.empty and bargains_list:
         try:
             # We need a DataFrame for bargains to merge easily
             df_bargains_for_merge = pd.DataFrame(bargains_list)
-            
-            # DEBUG: Check for matching titles
-            bonus_titles = set(df_bonus['Product_clean'].unique())
-            bargain_titles = set(df_bargains_for_merge['title_clean'].unique())
-            common = bonus_titles.intersection(bargain_titles)
-            print(f"DEBUG: Found {len(common)} potential matches on title")
             
             merged = pd.merge(
                 df_bonus,
@@ -318,82 +314,202 @@ def get_merged_data(store_id=None):
                 left_on='Product_clean',
                 right_on='title_clean',
                 how='inner',
-                suffixes=('_bonus', '_bargain') # Avoid collision on 'image_url' and 'id'
+                suffixes=('_bonus', '_bargain')
             )
             
-            # Prioritize bargain image if consistent, or bonus
+            # Prioritize bargain image
             if 'image_url_bonus' in merged.columns:
                 merged['image_url'] = merged['image_url_bonus']
             elif 'image_url_bargain' in merged.columns:
                 merged['image_url'] = merged['image_url_bargain']
 
             if not merged.empty:
-                # Calculate correct prices for overlap items
-                merged['Prijs_Nu'] = pd.to_numeric(merged['Prijs_Nu'], errors='coerce')
-                merged['priceNow'] = pd.to_numeric(merged['priceNow'], errors='coerce')
-                merged['Prijs_Was'] = pd.to_numeric(merged['Prijs_Was'], errors='coerce')
-                merged['priceWas'] = pd.to_numeric(merged['priceWas'], errors='coerce')
-                merged['markdownPercentage'] = pd.to_numeric(merged['markdownPercentage'], errors='coerce')
+                # Numeric conversions
+                for col in ['Prijs_Nu', 'priceNow', 'Prijs_Was', 'priceWas', 'markdownPercentage']:
+                    if col in merged.columns:
+                        merged[col] = pd.to_numeric(merged[col], errors='coerce')
                 
-                # Use the LOWEST price (bargain is usually better)
+                # Calculations
                 merged['final_price'] = merged[['Prijs_Nu', 'priceNow']].min(axis=1)
-                # Use the HIGHEST original price
                 merged['final_was_price'] = merged[['Prijs_Was', 'priceWas']].max(axis=1)
-                # Calculate total discount percentage
                 merged['total_discount_pct'] = ((merged['final_was_price'] - merged['final_price']) / merged['final_was_price'] * 100).round(0)
-                
-                # Calculate absolute savings in euros
                 merged['savings_euro'] = merged['final_was_price'] - merged['final_price']
                 
-                # Create smart discount label
-                def get_discount_label(row):
+                # --- ULTIMATE STACKING LOGIC ---
+                def get_stack_info(row):
+                    stock = row.get('stock')
+                    bonus = str(row.get('Bonus_Tekst', '')).lower()
+                    
+                    if not stock or not isinstance(stock, (int, float)) or stock <= 0:
+                        return None
+                        
+                    required = 0
+                    stack_type = ""
+                    
+                    if '1+1' in bonus:
+                        required = 2
+                        stack_type = "1 + 1 Gratis"
+                    elif '2+1' in bonus:
+                        required = 3
+                        stack_type = "2 + 1 Gratis"
+                    elif '2+2' in bonus:
+                        required = 4
+                        stack_type = "2 + 2 Gratis"
+                    elif '2e gratis' in bonus:
+                        required = 2
+                        stack_type = "2e Gratis"
+                    elif '2e halve' in bonus:
+                        required = 2
+                        stack_type = "2e Halve Prijs"
+                    elif '2 voor' in bonus:
+                        required = 2
+                        stack_type = "2 voor..."
+                    
+                    if required > 0 and stock >= required:
+                        sets = int(stock // required)
+                        total_items = sets * required
+                        
+                        # Calculate Bundle Price Logic
+                        # User Logic: Apply Markdown % ON TOP of the Bonus Bundle Price.
+                        
+                        # We calculate for ONE set (the minimum required), not total stock.
+                        effective_quantity = required 
+                        
+                        # Base Bundle Price (if it were just the bonus)
+                        base_bundle_price = 0
+                        
+                        # Regex to parse "2 voor 2.49" or "2 voor € 2.49"
+                        import re
+                        # Pattern matches: "2 voor" followed by price. Price might use comma or dot.
+                        # We expect stack_type to match "2 voor..." derived from bonus parsing earlier if implicit, 
+                        # but scanning the original 'bonus' text is safer.
+                        match_voor = re.search(r'(\d+)\s+voor\s+(?:€|&euro;)?\s*(\d+[,.]\d{2})', bonus)
+                        
+                        if match_voor:
+                             # We found an explicit "X voor Y" price in text! Use it!
+                             # e.g. "2 voor 2.49" -> qty=2, price=2.49
+                             try:
+                                 qty_in_deal = int(match_voor.group(1))
+                                 price_in_deal = float(match_voor.group(2).replace(',', '.'))
+                                 
+                                 # If our effective_quantity (required) matches the deal quantity, use the price directly.
+                                 if qty_in_deal == effective_quantity:
+                                     base_bundle_price = price_in_deal
+                                 else:
+                                     # Scale it? e.g. deal is 2 for 4, we generally shouldn't be here if required!=2
+                                     base_bundle_price = price_in_deal * (effective_quantity / qty_in_deal)
+                             except:
+                                 base_bundle_price = 0 # Fallback
+                        
+                        if base_bundle_price == 0:
+                            # Fallback logic if regex missed or text is different (e.g. 1+1 gratis)
+                            if '1+1' in stack_type:
+                                base_bundle_price = (row['final_was_price'] * effective_quantity) * 0.5
+                            elif '2+1' in stack_type:
+                                base_bundle_price = (row['final_was_price'] * effective_quantity) * (2/3)
+                            elif '2+2' in stack_type:
+                                base_bundle_price = (row['final_was_price'] * effective_quantity) * 0.5
+                            elif '2e gratis' in stack_type: 
+                                 base_bundle_price = (row['final_was_price'] * effective_quantity) * 0.5
+                            elif '2e halve' in stack_type:
+                                 base_bundle_price = (row['final_was_price'] * effective_quantity) * 0.75
+                            else:
+                                 # Try to use 'Prijs_Nu' if available as the bonus unit price
+                                 if pd.notna(row.get('Prijs_Nu')):
+                                    base_bundle_price = row['Prijs_Nu'] * effective_quantity
+                                 else:
+                                    base_bundle_price = row['final_was_price'] * effective_quantity
+
+                        # Apply Markdown Percentage if available
+                        markdown_pct = row.get('markdownPercentage', 0)
+                        
+                        # If markdown exists, User says: Bonus Price * (1 - Markdown)
+                        final_bundle_price = base_bundle_price
+                        if markdown_pct and markdown_pct > 0:
+                             final_bundle_price = base_bundle_price * (1 - (markdown_pct / 100))
+                        
+                        original_price = row['final_was_price'] * effective_quantity
+                        bundle_savings = original_price - final_bundle_price
+                        
+                        # Total available sets
+                        sets_available = int(stock // required)
+
+                        return {
+                            'is_stack': True,
+                            'required': required,
+                            'sets_available': sets_available,
+                            'total_items': effective_quantity,
+                            'stack_type': stack_type,
+                            'bundle_price': round(final_bundle_price, 2),
+                            'bundle_savings': round(bundle_savings, 2),
+                            'message': f"Stack {effective_quantity} stuks voor €{final_bundle_price:.2f}! (Normaal €{original_price:.2f})"
+                        }
+                    return None
+
+                # Discount labels logic
+                def get_discount_labels(row):
+                    labels = []
                     bonus_txt = row.get('Bonus_Tekst')
                     markdown_pct = row.get('markdownPercentage')
                     total_pct = row.get('total_discount_pct')
                     
-                    # Check if there's a special bonus mechanism (like "1+1 gratis")
-                    if pd.notna(bonus_txt) and bonus_txt and bonus_txt != 'nan':
-                        # Use bonus text for special deals
-                        return str(bonus_txt)
-                    elif pd.notna(total_pct) and total_pct > 0:
-                        # Regular percentage discount
-                        return f"-{int(total_pct)}%"
-                    elif pd.notna(markdown_pct) and markdown_pct > 0:
-                        return f"-{int(markdown_pct)}%"
-                    return ""
+                    if pd.notna(bonus_txt) and bonus_txt and str(bonus_txt).lower() != 'nan':
+                        labels.append({'text': str(bonus_txt), 'type': 'bonus'})
+                    
+                    if pd.notna(markdown_pct) and markdown_pct > 0:
+                        labels.append({'text': f"-{int(markdown_pct)}%", 'type': 'markdown'})
+                    
+                    if not labels and pd.notna(total_pct) and total_pct > 0:
+                        labels.append({'text': f"-{int(total_pct)}%", 'type': 'markdown'})
+                        
+                    return labels
                 
-                merged['discount_label'] = merged.apply(get_discount_label, axis=1)
+                merged['discount_labels'] = merged.apply(get_discount_labels, axis=1)
+                merged['stack_info'] = merged.apply(get_stack_info, axis=1)
                 
-                # DEDUPLICATION: Keep only unique bargain items (fixes Arla milk duplicate issue)
-                # When multiple bonus items match same bargain, keep the one with best bonus
+                # Deduplication
                 if 'id_bargain' in merged.columns:
-                    # Sort by savings (highest first) then drop duplicates by bargain ID
                     merged = merged.sort_values('savings_euro', ascending=False)
                     merged = merged.drop_duplicates(subset=['id_bargain'], keep='first')
-                    print(f"After deduplication: {len(merged)} unique overlap items")
                 
-                # Sanitize NaNs for JSON
+                # Sanitize
                 merged = merged.replace({np.nan: None})
                 
-                # Sort by category for frontend
+                # Sort by category
                 if 'categoryTitle' in merged.columns:
                     merged = merged.sort_values('categoryTitle')
 
-                # Convert to list for frontend
                 overlap_list = merged.to_dict(orient='records')
+                
+                # Filter for Ultimate Stacks
+                ultimate_stacks = [item for item in overlap_list if item.get('stack_info')]
+                
+                # Create Ranked List (All overlap items sorted by discount %)
+                ranked_list = sorted(overlap_list, key=lambda x: x.get('total_discount_pct', 0) or 0, reverse=True)
+
+
         except Exception as e:
             print(f"Error merging data: {e}")
             import traceback
             traceback.print_exc()
 
-    # Calculate Top 3 Best Deals (highest savings in euros)
+    # Calculate Top 3 Best Deals
     top3 = []
     if overlap_list:
-        # Sort by savings
         sorted_deals = sorted(overlap_list, key=lambda x: x.get('savings_euro', 0) or 0, reverse=True)
         top3 = sorted_deals[:3]
-        top3_names = [f"{d.get('Product', d.get('title'))} (€{d.get('savings_euro', 0):.2f})" for d in top3]
-        print(f"Top 3 deals: {top3_names}")
+
+    result = {
+        "bargains": bargains_list,
+        "bonus": bonus_list,
+        "overlap": overlap_list,
+        "ultimate_stacks": ultimate_stacks,
+        "ranked_list": ranked_list if 'ranked_list' in locals() else [], # New field
+        "top3": top3,
+        "store_id": store_id
+    }
+    
+    return result
 
     result = {
         "bargains": bargains_list,
