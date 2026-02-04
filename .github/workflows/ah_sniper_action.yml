@@ -2,10 +2,8 @@ name: AH Sniper Trend Tracker
 
 on:
   schedule:
-    # Dit is een Cron job: elke 20 minuten tussen 07:00 en 21:00 UTC
-    # 07:00 UTC is 08:00 Nederlandse tijd (wintertijd)
     - cron: '*/20 7-21 * * *'
-  workflow_dispatch: # Hiermee kun je het script handmatig starten in de GitHub interface
+  workflow_dispatch:
 
 jobs:
   build:
