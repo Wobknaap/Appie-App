@@ -1,0 +1,42 @@
+name: AH Sniper Trend Tracker
+
+on:
+  schedule:
+    # Dit is een Cron job: elke 20 minuten tussen 07:00 en 21:00 UTC
+    # 07:00 UTC is 08:00 Nederlandse tijd (wintertijd)
+    - cron: '*/20 7-21 * * *'
+  workflow_dispatch: # Hiermee kun je het script handmatig starten in de GitHub interface
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    # Cruciaal: Dit geeft de GitHub Bot rechten om je CSV aan te passen en te pushen
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run AH Sniper script
+        run: python ah_sniper.py
+
+      - name: Commit and Push trends
+        run: |
+          git config --global user.name "AH Sniper Bot"
+          git config --global user.email "bot@ah-sniper.com"
+          git add laatste_kans_trends.csv
+          # Alleen committen als er echt nieuwe data is toegevoegd aan de CSV
+          git commit -m "Update Laatste Kans trends: $(date)" || echo "Geen wijzigingen gevonden"
+          git push

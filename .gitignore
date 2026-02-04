@@ -1,1 +1,14 @@
+# Python virtuele omgeving
+venv/
+.venv/
+env/
+
+# Cache bestanden
+__pycache__/
+*.py[cod]
+
+# Omgevingsvariabelen (bevat je API keys!)
 .env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
