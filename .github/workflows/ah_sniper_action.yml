@@ -2,7 +2,7 @@ name: AH Sniper Trend Tracker
 
 on:
   schedule:
-    - cron: "*/20 7-21 * * *"
+    - cron: "*/30 7-20 * * *"
   workflow_dispatch:
 
 jobs:
