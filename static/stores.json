@@ -1,0 +1,197 @@
+[
+    {
+        "id": "1558",
+        "name": "AH Woenselse Markt",
+        "city": "Eindhoven"
+    },
+    {
+        "id": "3084",
+        "name": "AH XL Geldrop",
+        "city": "Geldrop"
+    },
+    {
+        "id": "1129",
+        "name": "AH Kalverstraat",
+        "city": "Amsterdam"
+    },
+    {
+        "id": "1130",
+        "name": "AH Nieuwezijds Voorburgwal",
+        "city": "Amsterdam"
+    },
+    {
+        "id": "1135",
+        "name": "AH Vijzelstraat",
+        "city": "Amsterdam"
+    },
+    {
+        "id": "1231",
+        "name": "AH Haarlemmerstraat",
+        "city": "Amsterdam"
+    },
+    {
+        "id": "1417",
+        "name": "AH Spuistraat",
+        "city": "Amsterdam"
+    },
+    {
+        "id": "3181",
+        "name": "AH XL Amsterdam Zuid",
+        "city": "Amsterdam"
+    },
+    {
+        "id": "1331",
+        "name": "AH Lijnbaan",
+        "city": "Rotterdam"
+    },
+    {
+        "id": "3003",
+        "name": "AH XL Rotterdam Alexander",
+        "city": "Rotterdam"
+    },
+    {
+        "id": "1472",
+        "name": "AH Utrecht Centraal",
+        "city": "Utrecht"
+    },
+    {
+        "id": "1473",
+        "name": "AH Voorstraat",
+        "city": "Utrecht"
+    },
+    {
+        "id": "3060",
+        "name": "AH XL Utrecht Kanaleneiland",
+        "city": "Utrecht"
+    },
+    {
+        "id": "1520",
+        "name": "AH Grote Marktstraat",
+        "city": "Den Haag"
+    },
+    {
+        "id": "1521",
+        "name": "AH Theresiastraat",
+        "city": "Den Haag"
+    },
+    {
+        "id": "3125",
+        "name": "AH XL Den Haag Leyweg",
+        "city": "Den Haag"
+    },
+    {
+        "id": "1678",
+        "name": "AH Rechtestraat",
+        "city": "Eindhoven"
+    },
+    {
+        "id": "1679",
+        "name": "AH Piazza Center",
+        "city": "Eindhoven"
+    },
+    {
+        "id": "1910",
+        "name": "AH Nieuwstraat",
+        "city": "Tilburg"
+    },
+    {
+        "id": "2012",
+        "name": "AH Station",
+        "city": "Groningen"
+    },
+    {
+        "id": "2104",
+        "name": "AH Oudegracht",
+        "city": "Haarlem"
+    },
+    {
+        "id": "2235",
+        "name": "AH Stationsplein",
+        "city": "Nijmegen"
+    },
+    {
+        "id": "2311",
+        "name": "AH Heuvelstraat",
+        "city": "Breda"
+    },
+    {
+        "id": "2405",
+        "name": "AH Burchtstraat",
+        "city": "Leiden"
+    },
+    {
+        "id": "2506",
+        "name": "AH Lange Delft",
+        "city": "Middelburg"
+    },
+    {
+        "id": "2623",
+        "name": "AH Oudestraat",
+        "city": "Kampen"
+    },
+    {
+        "id": "2701",
+        "name": "AH Marktstraat",
+        "city": "Apeldoorn"
+    },
+    {
+        "id": "2820",
+        "name": "AH Steenstraat",
+        "city": "Zwolle"
+    },
+    {
+        "id": "3005",
+        "name": "AH XL Maastricht",
+        "city": "Maastricht"
+    },
+    {
+        "id": "3012",
+        "name": "AH XL Arnhem",
+        "city": "Arnhem"
+    },
+    {
+        "id": "3024",
+        "name": "AH XL Amersfoort",
+        "city": "Amersfoort"
+    },
+    {
+        "id": "3034",
+        "name": "AH XL Delft",
+        "city": "Delft"
+    },
+    {
+        "id": "3042",
+        "name": "AH XL Dordrecht",
+        "city": "Dordrecht"
+    },
+    {
+        "id": "3051",
+        "name": "AH XL Enschede",
+        "city": "Enschede"
+    },
+    {
+        "id": "3089",
+        "name": "AH XL Zoetermeer",
+        "city": "Zoetermeer"
+    },
+    {
+        "id": "3105",
+        "name": "AH XL Alkmaar",
+        "city": "Alkmaar"
+    },
+    {
+        "id": "3112",
+        "name": "AH XL Leiden",
+        "city": "Leiden"
+    },
+    {
+        "id": "3134",
+        "name": "AH XL Haarlem",
+        "city": "Haarlem"
+    },
+    {
+        "id": "3156",
+        "name": "AH XL Almere Stad",
+        "city": "Almere"
+    }
+]

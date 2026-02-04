@@ -1,0 +1,20 @@
+# Auth tokens
+.appie.json
+
+# Network captures with private data
+ah_endpoints.json
+ah_traffic.mitm
+ah_traffic-login.mitm
+dump2.mitm
+dump2.har
+*.mitm
+*.har
+
+# Blog draft with personal info
+blog-draft.md
+
+# Dev/test tools
+cmd/dev/
+
+# Claude settings
+.claude/
