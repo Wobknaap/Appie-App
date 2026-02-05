@@ -225,6 +225,53 @@ h2 {
     color: var(--ah-orange);
 }
 
+/* Verspakketten Highlight */
+.vers-section .card {
+    border: 2px solid #00b000;
+    background: linear-gradient(to bottom right, white, #eaffea);
+}
+
+.vers-section h2 {
+    border-left-color: #00b000;
+    color: #006400;
+}
+
+/* Smart Match Box */
+.match-box {
+    margin-top: 1rem;
+    background: white;
+    border: 2px dashed #00ADE6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.match-header {
+    background: #00ADE6;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.match-content {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85rem;
+}
+
+.match-text {
+    margin-bottom: 0.2rem;
+    color: #333;
+}
+
+.match-price {
+    font-weight: 700;
+    color: #E30613;
+}
+
 /* Loading State */
 #loading {
     text-align: center;
@@ -276,6 +323,55 @@ h2 {
     margin: 0 auto;
     padding-bottom: 1rem;
 }
+
+/* Tab Navigation Buttons */
+#tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    /* More space between buttons */
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    /* Rounded modern look */
+    padding: 1rem 2rem;
+    /* Large touch target */
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #444;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: inherit;
+}
+
+.tab-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    color: var(--ah-blue);
+    border-color: #eee;
+}
+
+.tab-button.active {
+    background: var(--ah-blue);
+    color: white;
+    box-shadow: 0 8px 16px rgba(0, 173, 230, 0.25);
+    transform: translateY(-2px);
+}
+
+.tab-button:active {
+    transform: translateY(1px);
+}
+
 
 .podium-item {
     background: white;
@@ -368,39 +464,7 @@ h2 {
     margin-top: auto;
 }
 
-.podium-rank {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 30px;
-    background: #333;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1rem;
-    border: 2px solid white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
 
-.podium-item.gold .podium-rank {
-    background: #FFD700;
-    color: #333;
-}
-
-.podium-item.silver .podium-rank {
-    background: #C0C0C0;
-    color: #333;
-}
-
-.podium-item.bronze .podium-rank {
-    background: #CD7F32;
-    color: white;
-}
 
 /* Responsive podium */
 @media (max-width: 768px) {

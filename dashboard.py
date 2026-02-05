@@ -20,6 +20,29 @@ HEADERS = {
     "Accept": "application/json"
 }
 
+# --- KONIJNENVOER & VLEES CONFIG ---
+MEAL_KIT_KEYWORDS = ['verspakket', 'maaltijdpakket', 'curry pakket', 'lasagne pakket', 'soeppo', 'soep pakket']
+NEGATIVE_KEYWORDS = [
+    'salade', 'maaltijdsalade', 'broodje', 'hapje', 'snack', 'soep', 'pizza', 'loempia', 'bapao',
+    'roti', 'nasi', 'bami', 'mihoen', 'quiche', 'oven', 'magnetron', 'kant-en-klaar', 'stoom', 
+    'maaltijd', 'menu', 'schotel', 'wrap', 'sandwich', 'burger', 'kipschnitzel', 'cordon'
+]
+
+# Logic: If Meal Kit title contains KEY, look for matches in CATEGORY or KEYWORD
+MATCHING_RULES = {
+    'lasagne': {'keywords': ['gehakt', 'vega gehakt'], 'category': 'Vlees, kip, vis, vega'},
+    'curry': {'keywords': ['kipfilet', 'kipdij', 'kipstukjes', 'tofu', 'vega stukjes'], 'category': 'Vlees, kip, vis, vega'},
+    'madras': {'keywords': ['kipfilet', 'kipdij', 'kipstukjes', 'tofu'], 'category': 'Vlees, kip, vis, vega'},
+    'tandoori': {'keywords': ['kipfilet', 'kipdij', 'kipstukjes'], 'category': 'Vlees, kip, vis, vega'},
+    'soep': {'keywords': ['soepgroente', 'gehaktballetjes', 'stokbrood'], 'category': 'Groente'},
+    'pasta': {'keywords': ['gehakt', 'spekjes', 'kaas'], 'category': 'Vlees, kip, vis, vega'},
+    'risotto': {'keywords': ['paddenstoelen', 'kipfilet', 'kipdij', 'zalm'], 'category': 'Vlees, kip, vis, vega'},
+    'stamppot': {'keywords': ['rookworst', 'spekjes', 'gehaktbal'], 'category': 'Vlees, kip, vis, vega'},
+    'chili': {'keywords': ['gehakt', 'vega gehakt'], 'category': 'Vlees, kip, vis, vega'},
+    'wraps': {'keywords': ['kipfilet', 'kipdij', 'gehakt', 'vega reepjes'], 'category': 'Vlees, kip, vis, vega'},
+    'burrito': {'keywords': ['gehakt', 'kipfilet', 'kipdij', 'kipstukjes', 'bonen'], 'category': 'Vlees, kip, vis, vega'}
+}
+
 # Simple in-memory cache
 cache = {
     "data": None,
@@ -493,6 +516,97 @@ def get_merged_data(store_id=None):
             import traceback
             traceback.print_exc()
 
+    # 5. Process Verspakketten & Smart Matching
+    meal_kits = []
+    
+    # helper to find items in list matching keywords
+    def find_matches_in_list(source_list, keywords, category_filter=None):
+        matches = []
+        for item in source_list:
+            title = str(item.get('Product') or item.get('title') or '').lower()
+            cat = str(item.get('Categorie') or item.get('categoryTitle') or '').lower()
+            
+            # 1. Negative Keyword Check
+            if any(bad in title for bad in NEGATIVE_KEYWORDS):
+                continue
+
+            # 2. Category Check (if provided)
+            # This is loose matching: input 'Vlees' matches 'Vlees, kip, vis...'
+            if category_filter:
+                # We split valid categories by comma if multiple are allowed or just check containment
+                # Simple containment check:
+                if category_filter.lower() not in cat and cat not in category_filter.lower():
+                     # Fallback: sometimes categories are vague. If keyword is strongly matched, maybe allow?
+                     # For now: strict.
+                     continue
+
+            # 3. Positive Keyword Check
+            # We want WHOLE WORD match for short words like 'kip' to avoid 'kipkerrie' or 'kippie'
+            # But simple substring is easier. Let's try to be smart.
+            for k in keywords:
+                 if k in title:
+                     matches.append(item)
+                     break # Found one keyword match, good enough
+                
+        return matches
+
+    all_deals = overlap_list + bargains_list + bonus_list
+    
+    # Identify meal kits from all deals
+    for item in all_deals:
+        title = str(item.get('Product') or item.get('title') or '').lower()
+        if any(mk in title for mk in MEAL_KIT_KEYWORDS):
+            # Avoid duplicates if item is in multiple lists (overlap vs bargains)
+            # Use 'id' or 'webshopId' if available, otherwise title
+            item_id = item.get('id') or item.get('Product')
+            if not any((m.get('id') or m.get('Product')) == item_id for m in meal_kits):
+                
+                # Copy item to avoid mutating original list references
+                kit_item = item.copy()
+                
+                # --- SMART MATCHING LOGIC ---
+                kit_item['smart_match'] = None
+                
+                # Clean title for rule lookup
+                clean_title = title.lower()
+                
+                required_ingredients = []
+                target_category = None
+                
+                for rule_key, rules in MATCHING_RULES.items():
+                    if rule_key in clean_title:
+                        required_ingredients.extend(rules['keywords'])
+                        target_category = rules.get('category')
+                        break # Stop after first rule match to avoid mixing logic
+                
+                if required_ingredients:
+                    # Look for discounted matches in all deals
+                    possible_matches = find_matches_in_list(all_deals, required_ingredients, category_filter=target_category)
+                    
+                    # Sort matches by savings or relevance
+                    if possible_matches:
+                        # Pick the best match (e.g. highest discount or overlap item)
+                        # Prefer overlap items first
+                        best_match = next((m for m in possible_matches if m in overlap_list), None)
+                        if not best_match:
+                             best_match = possible_matches[0]
+                        
+                        # --- PRICE FIX LOGIC ---
+                        # Ensure 'final_price' is set properly for the Frontend
+                        # Bonus items might have Prijs_Nu, Bargains priceNow.
+                        match_price = best_match.get('final_price') or best_match.get('priceNow') or best_match.get('Prijs_Nu')
+                        # If price is still 0/None, try Prijs_Was or priceWas (better than 0)
+                        if match_price is None or match_price == 0:
+                             match_price = best_match.get('final_was_price') or best_match.get('priceWas') or best_match.get('Prijs_Was')
+                        
+                        # Store sanitized price back on the match object
+                        best_match['final_price'] = match_price
+                             
+                        kit_item['smart_match'] = best_match
+                        kit_item['match_message'] = f"Lekker met: {best_match.get('Product') or best_match.get('title')}"
+
+                meal_kits.append(kit_item)
+
     # Calculate Top 3 Best Deals
     top3 = []
     if overlap_list:
@@ -504,6 +618,7 @@ def get_merged_data(store_id=None):
         "bonus": bonus_list,
         "overlap": overlap_list,
         "ultimate_stacks": ultimate_stacks,
+        "meal_kits": meal_kits,
         "ranked_list": ranked_list if 'ranked_list' in locals() else [], # New field
         "top3": top3,
         "store_id": store_id

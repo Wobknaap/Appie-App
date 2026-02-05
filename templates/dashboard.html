@@ -34,8 +34,9 @@
 
         <!-- Tab Navigation -->
         <div id="tabs-container" style="display:none; margin-bottom: 2rem; justify-content: center; gap: 1rem;">
-            <button class="tab-button active" onclick="switchTab('massa')">🚀 Massa = Kassa</button>
+            <button class="tab-button" onclick="switchTab('massa')">🚀 Massa = Kassa</button>
             <button class="tab-button" onclick="switchTab('double')">🔥 Double Deals</button>
+            <button class="tab-button" onclick="switchTab('vers')">📦 Verspakketten</button>
             <button class="tab-button" onclick="switchTab('kans')">🗑️ Laatste Kans</button>
         </div>
 
@@ -60,6 +61,16 @@
                 <section class="overlap-section">
                     <h2>🔥 Double Deals (Bonus + Laatste Kans)</h2>
                     <div id="overlap-container"></div>
+                </section>
+            </div>
+
+            <!-- Tab: Verspakketten -->
+            <div id="tab-vers" class="tab-content" style="display:none;">
+                <section class="vers-section">
+                    <h2>📦 Verspakketten + Slimme Matches</h2>
+                    <p style="margin-bottom:1rem; color:#666;">Scoor een verspakket én de bijbehorende ingrediënten
+                        (vlees/vega) in de aanbieding!</p>
+                    <div id="vers-container"></div>
                 </section>
             </div>
 
@@ -95,6 +106,9 @@
             } else if (tabName === 'double') {
                 document.getElementById('tab-double').style.display = 'block';
                 document.querySelector('button[onclick="switchTab(\'double\')"]').classList.add('active');
+            } else if (tabName === 'vers') {
+                document.getElementById('tab-vers').style.display = 'block';
+                document.querySelector('button[onclick="switchTab(\'vers\')"]').classList.add('active');
             } else if (tabName === 'kans') {
                 document.getElementById('tab-kans').style.display = 'block';
                 document.querySelector('button[onclick="switchTab(\'kans\')"]').classList.add('active');
@@ -159,6 +173,7 @@
                 // Categorized sections
                 renderCategorized(data.overlap, 'overlap-container', 'Geen dubbele deals gevonden vandaag.');
                 renderCategorized(data.bargains, 'bargains-container', 'Geen laatste kansjes gevonden.');
+                renderCategorized(data.meal_kits, 'vers-container', 'Geen verspakketten in de aanbieding gevonden.');
 
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
@@ -224,7 +239,6 @@
 
                 return `
                     <div class="podium-item ${ranks[idx]}">
-                        <div class="podium-rank">${idx + 1}</div>
                         <div class="podium-medal">${medals[idx]}</div>
                         <div class="podium-image-container">
                             <img src="${imgUrl}" alt="${title}" loading="lazy">
@@ -279,6 +293,24 @@
                  `;
             }
 
+            // Smart Match Info
+            let matchHtml = '';
+            if (item.smart_match) {
+                const match = item.smart_match;
+                const matchTitle = match.Product || match.title;
+                const matchPrice = match.final_price || match.priceNow || match.Prijs_Nu;
+
+                matchHtml = `
+                    <div class="match-box">
+                        <div class="match-header">💡 Slimme Match</div>
+                        <div class="match-content">
+                            <span class="match-text">Combineer met <strong>${matchTitle}</strong></span>
+                            <span class="match-price">voor €${formatPrice(matchPrice)}</span>
+                        </div>
+                    </div>
+                 `;
+            }
+
             return `
                 <div class="card">
                      <div class="card-image" style="text-align:center; padding-bottom:1rem;">
@@ -291,6 +323,7 @@
                         ${unitSize}
                         ${stockHtml}
                         ${stackInfoHtml}
+                        ${matchHtml}
                     </div>
                     <div class="card-footer">
                         <div class="price-container">
