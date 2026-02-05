@@ -2283,3 +2283,209 @@ fetch_timestamp,title,brand,categoryTitle,priceWas,priceNow,markdownPercentage,s
 2026-02-05 11:35:29,Rosewood Steak strips chicken & pollock,Rosewood,Huisdier,2.49,1.87,25,6
 2026-02-05 11:35:29,Felix Sensations seaside met zalm & groenten,Felix,Huisdier,3.89,2.92,25,5
 2026-02-05 11:35:29,Sheba Perfect portions kip 3st,Sheba,Huisdier,3.69,2.77,25,3
+2026-02-05 13:02:43,AH Erwtensoep verspakket,AH,"Groente, aardappelen",3.99,2.39,40,2
+2026-02-05 13:02:43,AH Biologisch Hutspot,AH Biologisch,"Groente, aardappelen",2.29,1.37,40,2
+2026-02-05 13:02:43,AH Stamppot bloemkool en prei verspakket,AH,"Groente, aardappelen",5.49,2.69,40,2
+2026-02-05 13:02:43,AH Gesneden spitskool,AH,"Groente, aardappelen",2.19,1.31,40,2
+2026-02-05 13:02:43,AH Groente & granen volkoren couscous,AH,"Groente, aardappelen",3.99,2.39,40,1
+2026-02-05 13:02:43,AH Stoomgroente bloemkool marscarponesaus,AH,"Groente, aardappelen",3.99,1.43,40,1
+2026-02-05 13:02:43,AH Gesneden verspakket roerbaknoodles sesam,AH,"Groente, aardappelen",6.99,4.19,40,1
+2026-02-05 13:02:43,AH Culi's groene curry limoenkip verspakket,AH,"Groente, aardappelen",7.49,4.49,40,1
+2026-02-05 13:02:43,AH Culi's gebakken gnocchi verspakket,AH,"Groente, aardappelen",5.99,3.59,40,1
+2026-02-05 13:02:43,AH Pittige pompoen wortelsoep verspakket,AH,"Groente, aardappelen",4.59,2.75,40,1
+2026-02-05 13:02:43,AH Biologisch Rode kool,AH Biologisch,"Groente, aardappelen",2.29,1.37,40,1
+2026-02-05 13:02:43,AH Gele wortel nasi,AH,"Groente, aardappelen",1.99,1.19,40,1
+2026-02-05 13:02:43,AH Roti verspakket,AH,"Groente, aardappelen",5.89,3.53,40,1
+2026-02-05 13:02:43,AH Groentesoep verspakket,AH,"Groente, aardappelen",4.99,2.99,40,1
+2026-02-05 13:02:43,AH Wokgroente Thais grootverpakking,AH,"Groente, aardappelen",2.99,2.24,25,6
+2026-02-05 13:02:43,AH Dille,AH,"Groente, aardappelen",1.29,0.97,25,3
+2026-02-05 13:02:43,AH Fijngesneden spitskool,AH,"Groente, aardappelen",1.19,0.89,25,3
+2026-02-05 13:02:43,AH Thaise wokgroente prei rode peper,AH,"Groente, aardappelen",2.39,1.79,25,2
+2026-02-05 13:02:43,AH Roerbakgroente Italiaans kleinverpakking,AH,"Groente, aardappelen",1.99,1.49,25,2
+2026-02-05 13:02:43,AH Eikenblad slamelange,AH,"Groente, aardappelen",1.59,1.19,25,2
+2026-02-05 13:02:43,AH Krieltjes mix vastkokend,AH,"Groente, aardappelen",1.89,1.42,25,2
+2026-02-05 13:02:43,AH Burrito's verspakket,AH,"Groente, aardappelen",5.89,3.67,25,2
+2026-02-05 13:02:43,AH Gesneden uien grootverpakking,AH,"Groente, aardappelen",2.29,1.72,25,1
+2026-02-05 13:02:43,AH Gesneden verspakket pita gyros,AH,"Groente, aardappelen",6.99,5.24,25,1
+2026-02-05 13:02:43,AH Jonge bladsla veldsla kleinverpakking,AH,"Groente, aardappelen",1.39,1.04,25,1
+2026-02-05 13:02:43,AH Kleine kastanjechampignons,AH,"Groente, aardappelen",2.09,1.57,25,1
+2026-02-05 13:02:43,AH Kastanjechampignons,AH,"Groente, aardappelen",1.59,1.19,25,1
+2026-02-05 13:02:43,AH Luxe wok Japans champignons peultjes,AH,"Groente, aardappelen",2.99,2.24,25,1
+2026-02-05 13:02:43,AH Macaroni spaghetti groente klein,AH,"Groente, aardappelen",1.59,1.19,25,1
+2026-02-05 13:02:43,AH Macaroni spaghetti groente,AH,"Groente, aardappelen",1.89,1.42,25,1
+2026-02-05 13:02:43,AH Wokgroente Chinees grootverpakking,AH,"Groente, aardappelen",2.99,2.24,25,1
+2026-02-05 13:02:43,AH Eikenblad slamelange grootverpakking,AH,"Groente, aardappelen",2.59,1.94,25,1
+2026-02-05 13:02:43,AH IJsbergsla grootverpakking,AH,"Groente, aardappelen",1.99,1.49,25,1
+2026-02-05 13:02:43,AH IJsbergsla fijngesneden,AH,"Groente, aardappelen",1.69,1.27,25,1
+2026-02-05 13:02:43,AH Lasagne verspakket,AH,"Groente, aardappelen",5.49,3.37,25,1
+2026-02-05 13:02:43,AH Curry madras verspakket,AH,"Groente, aardappelen",5.89,4.42,25,1
+2026-02-05 13:02:43,AH Kip piri piri verspakket,AH,"Groente, aardappelen",5.59,4.19,25,1
+2026-02-05 13:02:43,AH Snijbonen kleinverpakking,AH,"Groente, aardappelen",1.99,1.49,25,1
+2026-02-05 13:02:43,AH Muskaatpompoen stukjes,AH,"Groente, aardappelen",3.09,2.32,25,1
+2026-02-05 13:02:43,AH Couscous Marokkaanse stijl verspakket,AH,"Groente, aardappelen",5.99,4.49,25,1
+2026-02-05 13:02:43,AH Vers geperst sap sinaasappel,AH,"Fruit, verse sappen",4.19,3.14,25,4
+2026-02-05 13:02:43,AH Rode druiven pitloos,AH,"Fruit, verse sappen",2.75,2.06,25,3
+2026-02-05 13:02:43,AH Verse watermeloen,AH,"Fruit, verse sappen",3.75,2.81,25,2
+2026-02-05 13:02:43,AH Vers geperst sap sinaasappel mango appel,AH,"Fruit, verse sappen",2.59,1.94,25,2
+2026-02-05 13:02:43,AH Cotton sweet pitloze witte druiven,AH,"Fruit, verse sappen",3.49,2.62,25,2
+2026-02-05 13:02:43,AH Versgeperst sap ananas sinaasappel,AH,"Fruit, verse sappen",2.59,1.94,25,2
+2026-02-05 13:02:43,AH Verse watermeloen,AH,"Fruit, verse sappen",2.49,1.87,25,1
+2026-02-05 13:02:43,AH Rode biet gehaktbal,AH,"Maaltijden, salades",5.69,3.41,40,3
+2026-02-05 13:02:43,AH Airfryermaaltijd lasagnette,AH,"Maaltijden, salades",5.49,3.29,40,1
+2026-02-05 13:02:43,AH Volkoren sandwich mozarella tomaat,AH,"Maaltijden, salades",3.50,2.28,35,1
+2026-02-05 13:02:43,AH Cordon bleu met spinazie,AH,"Maaltijden, salades",4.99,3.74,25,3
+2026-02-05 13:02:43,AH Verse pizza Amerikaans cheese onion,AH,"Maaltijden, salades",6.99,5.24,25,3
+2026-02-05 13:02:43,AH American pancakes naturel,AH,"Maaltijden, salades",2.19,1.64,25,3
+2026-02-05 13:02:43,AH Stoommaaltijd zalm roomsaus,AH,"Maaltijden, salades",7.49,3.74,25,3
+2026-02-05 13:02:43,Magioni bloemkoolbodem pizza,Magioni,"Maaltijden, salades",3.99,2.99,25,2
+2026-02-05 13:02:43,AH Stoommaaltijd pasta pesto,AH,"Maaltijden, salades",5.99,3.74,25,2
+2026-02-05 13:02:43,AH Braadworst bloemkool,AH,"Maaltijden, salades",4.99,3.74,25,2
+2026-02-05 13:02:43,AH Wrap caesar kip bacon,AH,"Maaltijden, salades",4.25,3.19,25,2
+2026-02-05 13:02:43,AH Terra Plantaardige wrap bacon ei,AH Terra,"Maaltijden, salades",4.15,3.11,25,1
+2026-02-05 13:02:43,AH Terra Stoommaaltijd pasta Italiaans,AH Terra,"Maaltijden, salades",5.99,3.74,25,1
+2026-02-05 13:02:43,AH Stamppot zuurkool rookworst,AH,"Maaltijden, salades",4.69,3.52,25,1
+2026-02-05 13:02:43,AH Kleine salade mango geitenkaas,AH,"Maaltijden, salades",3.99,2.99,25,1
+2026-02-05 13:02:43,AH Verse maaltijd witlof ham kaas,AH,"Maaltijden, salades",6.99,5.24,25,1
+2026-02-05 13:02:43,AH Verse maaltijd pappardelle zalm,AH,"Maaltijden, salades",6.99,5.24,25,1
+2026-02-05 13:02:43,AH Verse pizza Amerikaans spicy salami,AH,"Maaltijden, salades",6.99,5.24,25,1
+2026-02-05 13:02:43,AH Maaltijdsalade Italiaanse kip,AH,"Maaltijden, salades",5.99,4.49,25,1
+2026-02-05 13:02:43,AH Verse stamppot boerenkool,AH,"Maaltijden, salades",5.99,4.49,25,1
+2026-02-05 13:02:43,AH Terra Verse pureersoep pompoen wortel,AH Terra,"Maaltijden, salades",4.49,3.37,25,1
+2026-02-05 13:02:43,AH Salade erbij blauwe kaas,AH,"Maaltijden, salades",4.49,3.37,25,1
+2026-02-05 13:02:43,AH Maaltijdsalade kip ketjap,AH,"Maaltijden, salades",5.59,4.19,25,1
+2026-02-05 13:02:43,AH Salade erbij witlof appel,AH,"Maaltijden, salades",3.99,2.99,25,1
+2026-02-05 13:02:43,Jan Poffertjes met boter en suiker,Jan,"Maaltijden, salades",3.29,2.47,25,1
+2026-02-05 13:02:43,AH Verse stamppot witlof ham kaas,AH,"Maaltijden, salades",5.59,4.19,25,1
+2026-02-05 13:02:43,AH Maaltijdsalade Japanse noodles roerei,AH,"Maaltijden, salades",5.89,4.42,25,1
+2026-02-05 13:02:43,Bertolli Pizzabodems,Bertolli,"Maaltijden, salades",2.75,2.06,25,1
+2026-02-05 13:02:43,AH Gehaktballetjes Hollands 12 stuks,AH,Vlees,6.49,3.89,40,4
+2026-02-05 13:02:43,AH Scharrel kip saté schnitzel 2 stuks,AH,Vlees,3.29,1.97,40,3
+2026-02-05 13:02:43,AH Gepaneerde schnitzel 2 stuks,AH,Vlees,3.99,2.39,40,2
+2026-02-05 13:02:43,AH Boomstammetje,AH,Vlees,2.49,1.49,40,2
+2026-02-05 13:02:43,Wahid Kippenbouten gegaard,Wahid,Vlees,14.98,8.99,40,1
+2026-02-05 13:02:43,AH Excellent Ossenhaas,AH Excellent,Vlees,10.49,6.29,40,1
+2026-02-05 13:02:43,AH Scharrel krokante kipfiletschnitzel,AH,Vlees,3.99,2.99,25,4
+2026-02-05 13:02:43,AH Biologisch Hamburger 2 stuks,AH Biologisch,Vlees,3.99,2.99,25,2
+2026-02-05 13:02:43,AH Speklap,AH,Vlees,3.19,2.39,25,2
+2026-02-05 13:02:43,AH Excellent Black angus burger,AH Excellent,Vlees,5.49,4.12,25,2
+2026-02-05 13:02:43,AH Excellent Entrecôte,AH Excellent,Vlees,14.49,10.87,25,1
+2026-02-05 13:02:43,AH Rundergehaktbal,AH,Vlees,6.49,4.87,25,1
+2026-02-05 13:02:43,AH Rookworst,AH,Vlees,2.99,1.79,40,1
+2026-02-05 13:02:43,AH Gerookte knakworsten,AH,Vlees,3.29,2.47,25,5
+2026-02-05 13:02:43,Unox Rookworst vegetarisch,Unox,Vlees,4.49,3.37,25,4
+2026-02-05 13:02:43,AH Rookworst mager,AH,Vlees,3.49,2.62,25,1
+2026-02-05 13:02:43,AH Sushi zalm,AH,Vis,5.99,4.49,25,1
+2026-02-05 13:02:43,AH Verse mosselen,AH,Vis,8.99,6.74,25,1
+2026-02-05 13:02:43,AH Terra Plantaardige gehaktbal,AH Terra,"Vegetarisch, vegan en plantaardig",2.25,1.35,40,1
+2026-02-05 13:02:43,AH Chili kaasschnitzel,AH,"Vegetarisch, vegan en plantaardig",2.59,1.94,25,1
+2026-02-05 13:02:43,Rude Health Barista soja,Rude Health,"Vegetarisch, vegan en plantaardig",2.89,1.45,50,4
+2026-02-05 13:02:43,Friesche Vlag Barista haver,Friesche Vlag,"Vegetarisch, vegan en plantaardig",2.69,1.61,40,3
+2026-02-05 13:02:43,AH Terra Plantaardige barista haver,AH Terra,"Vegetarisch, vegan en plantaardig",1.19,0.89,25,10
+2026-02-05 13:02:43,Natrue Barista flavoured pumpkin spice oat,Natrue,"Vegetarisch, vegan en plantaardig",2.79,2.09,25,6
+2026-02-05 13:02:43,AH Terra Plantaardig volle drink,AH Terra,"Vegetarisch, vegan en plantaardig",1.69,1.27,25,6
+2026-02-05 13:02:43,Rude Health Barista haver,Rude Health,"Vegetarisch, vegan en plantaardig",2.69,2.02,25,3
+2026-02-05 13:02:43,MamasChai Masala chai drink,MamasChai,"Vegetarisch, vegan en plantaardig",3.39,2.54,25,2
+2026-02-05 13:02:43,AH Terra Biologische gerookte tofu,AH Terra,"Vegetarisch, vegan en plantaardig",1.99,1.49,25,1
+2026-02-05 13:02:43,Kips Theeworst,Kips,Vleeswaren,2.75,0.83,70,5
+2026-02-05 13:02:43,Galbani Mozzarella bufala,Galbani,Kaas,3.25,2.44,25,1
+2026-02-05 13:02:43,AH Italiaanse mozzarella,AH,Kaas,1.79,1.34,25,5
+2026-02-05 13:02:43,Natuurfarm de Boed Mais-scharreleieren M,Natuurfarm de Boed,"Zuivel, eieren",2.59,1.94,25,1
+2026-02-05 13:02:43,AH Protein drink vanillesmaak,AH,"Zuivel, eieren",1.49,0.45,70,7
+2026-02-05 13:02:43,Campina Magere milde kwark aardbei & granola,Campina,"Zuivel, eieren",1.69,1.01,40,3
+2026-02-05 13:02:43,AH Protein drink mango,AH,"Zuivel, eieren",1.49,1.12,25,1
+2026-02-05 13:02:43,AH Protein drink aardbei,AH,"Zuivel, eieren",1.49,1.12,25,1
+2026-02-05 13:02:43,Arla Biologisch halfvolle melk,Arla,"Zuivel, eieren",1.19,0.89,25,1
+2026-02-05 13:02:43,Campina Vla slagroom vanille smaak,Campina,"Zuivel, eieren",2.49,1.87,25,2
+2026-02-05 13:02:43,Optimel Proteïne drinkyoghurt perzik peer,Optimel,"Zuivel, eieren",2.59,1.94,25,1
+2026-02-05 13:02:43,Campina Zacht & luchtig vanille smaak,Campina,"Zuivel, eieren",2.49,1.87,25,1
+2026-02-05 13:02:43,Arla Skyr vanille yoghurt 0% vet,Arla,"Zuivel, eieren",2.19,1.64,25,1
+2026-02-05 13:02:43,Lindahls Protein kvarg framboossmaak,Lindahls,"Zuivel, eieren",2.79,1.67,40,3
+2026-02-05 13:02:43,Campina Zacht en luchtig framboos smaak,Campina,"Zuivel, eieren",2.49,1.87,25,4
+2026-02-05 13:02:43,HiPRO Protein kwark mango,HiPRO,"Zuivel, eieren",1.99,1.49,25,4
+2026-02-05 13:02:43,AH Witte chocolade mousse,AH,"Zuivel, eieren",1.55,1.16,25,1
+2026-02-05 13:02:43,Campina Zacht en luchtig banaansmaak,Campina,"Zuivel, eieren",2.49,1.87,25,1
+2026-02-05 13:02:43,Campina Houdbare halfvolle melk,Campina,"Zuivel, eieren",1.79,1.34,25,1
+2026-02-05 13:02:43,AH Roomboter met plantaardige olie ongezout,AH,"Zuivel, eieren",2.19,1.64,25,1
+2026-02-05 13:02:43,AH Roomboter met plantaardige olie gezouten,AH,"Zuivel, eieren",2.29,1.72,25,3
+2026-02-05 13:02:43,Ehrmann High protein banana drink,Ehrmann,"Zuivel, eieren",1.89,0.95,50,10
+2026-02-05 13:02:43,Ehrmann High protein vanilla,Ehrmann,"Zuivel, eieren",1.89,1.13,40,9
+2026-02-05 13:02:43,AH Chocolademelk wit,AH,"Zuivel, eieren",1.29,0.97,25,6
+2026-02-05 13:02:43,Campina Langlekker halfvolle melk voordeelpak,Campina,"Zuivel, eieren",7.79,5.84,25,4
+2026-02-05 13:02:43,Campina Langlekker volle melk voordeel 4-pack,Campina,"Zuivel, eieren",8.29,6.22,25,3
+2026-02-05 13:02:43,Dr. Oetker Safari diertjes decoratie,Dr. Oetker,Bakkerij,2.99,0.30,90,5
+2026-02-05 13:02:43,Leentjes Strooi pret letters & disco dip,Leentjes,Bakkerij,3.69,1.85,50,4
+2026-02-05 13:02:43,Koopmans Brood uit de pan Grieks,Koopmans,Bakkerij,2.69,1.35,50,3
+2026-02-05 13:02:43,Koopmans Plaatcake stroopwafel,Koopmans,Bakkerij,3.29,1.65,50,2
+2026-02-05 13:02:43,AH Spijskoekjes,AH,Bakkerij,3.39,2.03,40,2
+2026-02-05 13:02:43,Leentjes Strooi pret diertjes & regenboog,Leentjes,Bakkerij,3.69,2.21,40,1
+2026-02-05 13:02:43,Dr. Oetker Decoratiestiften choco & karamel,Dr. Oetker,Bakkerij,3.89,2.92,25,1
+2026-02-05 13:02:43,AH Peshwari naanbrood,AH,Bakkerij,1.89,1.13,40,2
+2026-02-05 13:02:43,AH Gevouwen flatbread harissa,AH,Bakkerij,1.95,1.46,25,1
+2026-02-05 13:02:43,Duyvis Fijnproevers chili cashew & amandel,Duyvis,"Borrel, chips, snacks",3.99,2.99,25,1
+2026-02-05 13:02:43,AH Kip kerrie salade,AH,"Borrel, chips, snacks",2.99,0.90,70,13
+2026-02-05 13:02:43,AH Komkommersalade,AH,"Borrel, chips, snacks",1.99,1.19,40,5
+2026-02-05 13:02:43,AH Sparerib salade,AH,"Borrel, chips, snacks",2.99,1.79,40,4
+2026-02-05 13:02:43,Chtoura fields Falafelmix,Chtoura fields,"Pasta, rijst, wereldkeuken",2.39,0.72,70,2
+2026-02-05 13:02:43,Knorr Wereldgerechten Surinaamse roti,Knorr,"Pasta, rijst, wereldkeuken",4.69,2.81,40,1
+2026-02-05 13:02:43,Sera Red beans in tomato sauce,Sera,"Soepen, sauzen, kruiden, olie",2.99,1.50,50,6
+2026-02-05 13:02:43,Saitaku Miso soup,Saitaku,"Soepen, sauzen, kruiden, olie",2.39,1.79,25,1
+2026-02-05 13:02:43,Oma's Bakkerij Chocolate chip koek,Oma's Bakkerij,"Koek, snoep, chocolade",2.99,1.79,40,5
+2026-02-05 13:02:43,AH Roomboter cupcake marmer,AH,"Koek, snoep, chocolade",1.85,1.39,25,1
+2026-02-05 13:02:43,Lotus Wafels vanille aap,Lotus,"Koek, snoep, chocolade",2.59,1.94,25,1
+2026-02-05 13:02:43,Venco Droptoppers zacht & zoet,Venco,"Koek, snoep, chocolade",2.69,2.02,25,2
+2026-02-05 13:02:43,AH Stroopkoek,AH,"Koek, snoep, chocolade",1.75,1.31,25,1
+2026-02-05 13:02:43,Oma's Bakkerij Haverkoek appel kaneel,Oma's Bakkerij,"Koek, snoep, chocolade",2.99,1.79,40,6
+2026-02-05 13:02:43,Smoeltjes UFO Smoeltjes,Smoeltjes,"Koek, snoep, chocolade",2.69,1.61,40,1
+2026-02-05 13:02:43,Knoppers Peanut wafel,Knoppers,"Koek, snoep, chocolade",1.69,1.27,25,23
+2026-02-05 13:02:43,Verkade Chocolate chip wit,Verkade,"Koek, snoep, chocolade",2.29,1.72,25,15
+2026-02-05 13:02:43,Verkade San Francisco zero,Verkade,"Koek, snoep, chocolade",2.29,1.72,25,11
+2026-02-05 13:02:43,Nutella B-ready,Nutella,"Koek, snoep, chocolade",3.49,2.62,25,9
+2026-02-05 13:02:43,Verkade Smiles met crèmevulling,Verkade,"Koek, snoep, chocolade",2.49,1.87,25,7
+2026-02-05 13:02:43,Sera Sourcherry jam,Sera,"Ontbijtgranen, beleg",3.69,1.85,50,9
+2026-02-05 13:02:43,Purasana Moringa poeder,Purasana,"Ontbijtgranen, beleg",8.99,5.39,40,14
+2026-02-05 13:02:43,Purasana Gember poeder,Purasana,"Ontbijtgranen, beleg",6.69,4.01,40,6
+2026-02-05 13:02:43,Purasana Kurkuma poeder,Purasana,"Ontbijtgranen, beleg",6.79,4.07,40,5
+2026-02-05 13:02:43,Purasana Green mix poeder,Purasana,"Ontbijtgranen, beleg",8.99,5.39,40,5
+2026-02-05 13:02:43,Purasana Maca poeder,Purasana,"Ontbijtgranen, beleg",6.99,5.24,25,5
+2026-02-05 13:02:43,Purasana Hennepzaden,Purasana,"Ontbijtgranen, beleg",6.69,5.02,25,3
+2026-02-05 13:02:43,Barebells Soft protein bar coco choco,Barebells,Tussendoortjes,2.99,2.24,25,22
+2026-02-05 13:02:43,Barebells Soft protein bar lemon cheesecake,Barebells,Tussendoortjes,2.99,2.24,25,18
+2026-02-05 13:02:43,Barebells Soft protein bar marshmallow rocky road,Barebells,Tussendoortjes,2.89,2.17,25,18
+2026-02-05 13:02:43,McVitie's Crunchy haverkoek,McVitie's,Tussendoortjes,2.29,1.72,25,14
+2026-02-05 13:02:43,Barebells Protein bar white salty peanut,Barebells,Tussendoortjes,2.99,2.24,25,9
+2026-02-05 13:02:43,Barebells Protein bar caramel cashew,Barebells,Tussendoortjes,2.99,2.24,25,6
+2026-02-05 13:02:43,AH IJskoffie cappuccino,AH,"Koffie, thee",0.75,0.56,25,4
+2026-02-05 13:02:43,AH IJskoffie skinny latte,AH,"Koffie, thee",1.99,1.49,25,6
+2026-02-05 13:02:43,Celsius Sparkling arctic vibe,Celsius,"Frisdrank, sappen, water",1.65,1.24,25,7
+2026-02-05 13:02:43,AA Drink Burner zero,AA Drink,"Frisdrank, sappen, water",0.99,0.74,25,2
+2026-02-05 13:02:43,Upfront Gel appel smaak,Upfront,"Frisdrank, sappen, water",1.99,1.49,25,15
+2026-02-05 13:02:43,Upfront Elektrolytes appel smaak,Upfront,"Frisdrank, sappen, water",7.99,5.99,25,9
+2026-02-05 13:02:43,Upfront Electrolytes sinaasappel,Upfront,Gezondheid en sport,7.99,5.99,25,13
+2026-02-05 13:02:43,ESN Flexpresso whey protein coffee mocha,ESN,Gezondheid en sport,17.99,13.49,25,2
+2026-02-05 13:02:43,ESN Flexpresso whey protein coffee,ESN,Gezondheid en sport,17.99,13.49,25,1
+2026-02-05 13:02:43,Lenor Wasverzachter katoen,Lenor,Huishouden,9.99,5.99,40,10
+2026-02-05 13:02:43,Lenor Fresh air wasverzachter tropical sunset,Lenor,Huishouden,8.19,4.91,40,7
+2026-02-05 13:02:43,Lenor Fresh air wasverzachter fleurige bloesem,Lenor,Huishouden,8.19,4.91,40,7
+2026-02-05 13:02:43,Ariel 4in1 pods+ black wasmiddelcapsules,Ariel,Huishouden,26.49,15.89,40,6
+2026-02-05 13:02:43,Ariel Active+ wasmiddel,Ariel,Huishouden,15.99,9.59,40,6
+2026-02-05 13:02:43,Lenor Fresh air wasverzachter moonlight,Lenor,Huishouden,8.19,4.91,40,5
+2026-02-05 13:02:43,Lenor Vloeibaar wasmiddel amethist,Lenor,Huishouden,13.99,8.39,40,4
+2026-02-05 13:02:43,Ariel Color+ touch of lenor wasmiddel,Ariel,Huishouden,15.99,9.59,40,4
+2026-02-05 13:02:43,Lenor Wasverzachter gouden orchidee,Lenor,Huishouden,9.99,7.49,25,12
+2026-02-05 13:02:43,Lenor Wasverzachter zeebries,Lenor,Huishouden,9.99,7.49,25,11
+2026-02-05 13:02:43,Ariel 4in1 pods+ black wasmiddelcapsules,Ariel,Huishouden,15.99,11.99,25,6
+2026-02-05 13:02:43,Ariel Revita black+ wasmiddel,Ariel,Huishouden,15.99,11.99,25,3
+2026-02-05 13:02:43,Ariel Ultra+ vlekverwijderaar wasmiddel,Ariel,Huishouden,15.99,11.99,25,2
+2026-02-05 13:02:43,Encore Tuna loin,Encore,Huisdier,2.29,1.37,40,17
+2026-02-05 13:02:43,"Cesar Natural goodness rund,sperzie,wortel",Cesar,Huisdier,1.69,1.01,40,9
+2026-02-05 13:02:43,Rosewood Delidelight salmon,Rosewood,Huisdier,1.89,1.13,40,5
+2026-02-05 13:02:43,Whiskas Met rund en saus,Whiskas,Huisdier,2.39,1.43,40,4
+2026-02-05 13:02:43,Felix Elke dag feest senior vis selectie gelei,Felix,Huisdier,6.69,4.01,40,3
+2026-02-05 13:02:43,AH Pate met zalm,AH,Huisdier,0.79,0.59,25,14
+2026-02-05 13:02:43,Vitakraft Vita hearts huid & vacht zalm,Vitakraft,Huisdier,1.99,1.49,25,8
+2026-02-05 13:02:43,"Felix Soup vis kabeljauw, tonijn, schol",Felix,Huisdier,2.99,2.24,25,6
+2026-02-05 13:02:43,Felix Original vis selectie in gelei,Felix,Huisdier,5.69,4.27,25,6
+2026-02-05 13:02:43,Rosewood Steak strips chicken & pollock,Rosewood,Huisdier,2.49,1.87,25,6
+2026-02-05 13:02:43,Rosewood Steak bites beef & pollock,Rosewood,Huisdier,2.49,1.87,25,5
+2026-02-05 13:02:43,Felix Sensations seaside met zalm & groenten,Felix,Huisdier,3.89,2.92,25,5
+2026-02-05 13:02:43,Sheba Perfect portions kip 3st,Sheba,Huisdier,3.69,2.77,25,3
