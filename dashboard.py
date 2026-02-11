@@ -619,21 +619,12 @@ def get_merged_data(store_id=None):
         "overlap": overlap_list,
         "ultimate_stacks": ultimate_stacks,
         "meal_kits": meal_kits,
-        "ranked_list": ranked_list if 'ranked_list' in locals() else [], # New field
+        "ranked_list": ranked_list if 'ranked_list' in locals() else [],
         "top3": top3,
         "store_id": store_id
     }
     
-    return result
-
-    result = {
-        "bargains": bargains_list,
-        "bonus": bonus_list[:100],
-        "overlap": overlap_list,
-        "top3": top3
-    }
-    
-    # Update cache with store_id key
+    # Update cache with store_id key BEFORE returning
     cache[cache_key] = {
         "data": result,
         "timestamp": time.time()

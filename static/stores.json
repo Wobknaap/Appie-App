@@ -1,13 +1,23 @@
 [
     {
-        "id": "1558",
-        "name": "AH Woenselse Markt",
-        "city": "Eindhoven"
+        "id": "3105",
+        "name": "AH XL Alkmaar",
+        "city": "Alkmaar"
     },
     {
-        "id": "3084",
-        "name": "AH XL Geldrop",
-        "city": "Geldrop"
+        "id": "3156",
+        "name": "AH XL Almere Stad",
+        "city": "Almere"
+    },
+    {
+        "id": "3024",
+        "name": "AH XL Amersfoort",
+        "city": "Amersfoort"
+    },
+    {
+        "id": "1231",
+        "name": "AH Haarlemmerstraat",
+        "city": "Amsterdam"
     },
     {
         "id": "1129",
@@ -20,18 +30,13 @@
         "city": "Amsterdam"
     },
     {
-        "id": "1135",
-        "name": "AH Vijzelstraat",
-        "city": "Amsterdam"
-    },
-    {
-        "id": "1231",
-        "name": "AH Haarlemmerstraat",
-        "city": "Amsterdam"
-    },
-    {
         "id": "1417",
         "name": "AH Spuistraat",
+        "city": "Amsterdam"
+    },
+    {
+        "id": "1135",
+        "name": "AH Vijzelstraat",
         "city": "Amsterdam"
     },
     {
@@ -40,29 +45,24 @@
         "city": "Amsterdam"
     },
     {
-        "id": "1331",
-        "name": "AH Lijnbaan",
-        "city": "Rotterdam"
+        "id": "2701",
+        "name": "AH Marktstraat",
+        "city": "Apeldoorn"
     },
     {
-        "id": "3003",
-        "name": "AH XL Rotterdam Alexander",
-        "city": "Rotterdam"
+        "id": "3012",
+        "name": "AH XL Arnhem",
+        "city": "Arnhem"
     },
     {
-        "id": "1472",
-        "name": "AH Utrecht Centraal",
-        "city": "Utrecht"
+        "id": "2311",
+        "name": "AH Heuvelstraat",
+        "city": "Breda"
     },
     {
-        "id": "1473",
-        "name": "AH Voorstraat",
-        "city": "Utrecht"
-    },
-    {
-        "id": "3060",
-        "name": "AH XL Utrecht Kanaleneiland",
-        "city": "Utrecht"
+        "id": "3034",
+        "name": "AH XL Delft",
+        "city": "Delft"
     },
     {
         "id": "1520",
@@ -80,9 +80,219 @@
         "city": "Den Haag"
     },
     {
-        "id": "1678",
-        "name": "AH Rechtestraat",
-        "city": "Eindhoven"
+        "id": "3042",
+        "name": "AH XL Dordrecht",
+        "city": "Dordrecht"
+    },
+    {
+        "id": "1379",
+        "name": "AH 18 Septemberplein",
+        "city": "Eindhoven",
+        "address": {
+            "street": "18 Septemberplein",
+            "houseNumber": "23",
+            "postalCode": "5611AL",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.441259,
+            "longitude": 5.478943
+        }
+    },
+    {
+        "id": "4129",
+        "name": "AH Ardechelaan",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Ardechelaan",
+            "houseNumber": "5",
+            "postalCode": "5627EM",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.488676,
+            "longitude": 5.440515
+        }
+    },
+    {
+        "id": "8670",
+        "name": "AH Cassandraplein",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Cassandraplein",
+            "houseNumber": "8",
+            "postalCode": "5631BA",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.460224,
+            "longitude": 5.488757
+        }
+    },
+    {
+        "id": "1208",
+        "name": "AH Franz Leharplein",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Franz Leharplein",
+            "houseNumber": "19",
+            "postalCode": "5654AZ",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.423335,
+            "longitude": 5.462422
+        }
+    },
+    {
+        "id": "1041",
+        "name": "AH Hoogstraat",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Hoogstraat",
+            "houseNumber": "100",
+            "postalCode": "5615PS",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.432634,
+            "longitude": 5.469944
+        }
+    },
+    {
+        "id": "1555",
+        "name": "AH Insulindelaan",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Insulindelaan",
+            "houseNumber": "130",
+            "postalCode": "5613BT",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.442314,
+            "longitude": 5.503217
+        }
+    },
+    {
+        "id": "1661",
+        "name": "AH Kamperfoelielaan",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Kamperfoelielaan",
+            "houseNumber": "45",
+            "postalCode": "5643BB",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.422468,
+            "longitude": 5.499131
+        }
+    },
+    {
+        "id": "8563",
+        "name": "AH Leenderweg",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Leenderweg",
+            "houseNumber": "50",
+            "postalCode": "5615AA",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.427043,
+            "longitude": 5.48859
+        }
+    },
+    {
+        "id": "1394",
+        "name": "AH Limburglaan",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Limburglaan",
+            "houseNumber": "2",
+            "postalCode": "5652AA",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.435279,
+            "longitude": 5.451453
+        }
+    },
+    {
+        "id": "5835",
+        "name": "AH Luchthavenweg",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Luchthavenweg",
+            "houseNumber": "25",
+            "postalCode": "5657EA",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.458914,
+            "longitude": 5.392202
+        }
+    },
+    {
+        "id": "1657",
+        "name": "AH Meerzand",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Meerzand",
+            "houseNumber": "6",
+            "postalCode": "5658LJ",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.442432,
+            "longitude": 5.409766
+        }
+    },
+    {
+        "id": "5816",
+        "name": "AH Neckerspoel",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Neckerspoel",
+            "houseNumber": "10",
+            "postalCode": "5611AD",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.443278,
+            "longitude": 5.480161
+        }
+    },
+    {
+        "id": "1188",
+        "name": "AH Orionstraat",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Orionstraat",
+            "houseNumber": "149",
+            "postalCode": "5632DC",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.470476,
+            "longitude": 5.49412
+        }
+    },
+    {
+        "id": "1179",
+        "name": "AH Ouverture",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Ouverture",
+            "houseNumber": "214",
+            "postalCode": "5629PX",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.489289,
+            "longitude": 5.472738
+        }
     },
     {
         "id": "1679",
@@ -90,9 +300,154 @@
         "city": "Eindhoven"
     },
     {
-        "id": "1910",
-        "name": "AH Nieuwstraat",
-        "city": "Tilburg"
+        "id": "5514",
+        "name": "AH Professor Holstlaan",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Professor Holstlaan",
+            "houseNumber": "4",
+            "postalCode": "5656AA",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.413788,
+            "longitude": 5.46398
+        }
+    },
+    {
+        "id": "1678",
+        "name": "AH Rechtestraat",
+        "city": "Eindhoven"
+    },
+    {
+        "id": "1077",
+        "name": "AH Roostenlaan",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Roostenlaan",
+            "houseNumber": "112",
+            "postalCode": "5644GJ",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.420077,
+            "longitude": 5.491616
+        }
+    },
+    {
+        "id": "1053",
+        "name": "AH Sint Petrus Canisiuslaan",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Sint Petrus Canisiuslaan",
+            "houseNumber": "43",
+            "postalCode": "5645GC",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.427916,
+            "longitude": 5.509809
+        }
+    },
+    {
+        "id": "5885",
+        "name": "AH Stationsplein",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Stationsplein",
+            "houseNumber": "24",
+            "postalCode": "5611AC",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.442348,
+            "longitude": 5.479531
+        }
+    },
+    {
+        "id": "8616",
+        "name": "AH Strijpsestraat",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Strijpsestraat",
+            "houseNumber": "137",
+            "postalCode": "5616GM",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.44104,
+            "longitude": 5.453159
+        }
+    },
+    {
+        "id": "1250",
+        "name": "AH Tarwelaan",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Tarwelaan",
+            "houseNumber": "70",
+            "postalCode": "5632KG",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.477102,
+            "longitude": 5.493041
+        }
+    },
+    {
+        "id": "1876",
+        "name": "AH Torenallee",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Torenallee",
+            "houseNumber": "86",
+            "postalCode": "5617BD",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.448325,
+            "longitude": 5.453416
+        }
+    },
+    {
+        "id": "1614",
+        "name": "AH Winkelcentrum Woensel",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Winkelcentrum Woensel",
+            "houseNumber": "119",
+            "postalCode": "5625AG",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.468155,
+            "longitude": 5.473893
+        }
+    },
+    {
+        "id": "1558",
+        "name": "AH Woenselse Markt",
+        "city": "Eindhoven",
+        "address": {
+            "street": "Woenselse Markt",
+            "houseNumber": "5",
+            "postalCode": "5612CP",
+            "city": "Eindhoven"
+        },
+        "geoLocation": {
+            "latitude": 51.45186,
+            "longitude": 5.471978
+        }
+    },
+    {
+        "id": "3051",
+        "name": "AH XL Enschede",
+        "city": "Enschede"
+    },
+    {
+        "id": "3084",
+        "name": "AH XL Geldrop",
+        "city": "Geldrop"
     },
     {
         "id": "2012",
@@ -105,24 +460,9 @@
         "city": "Haarlem"
     },
     {
-        "id": "2235",
-        "name": "AH Stationsplein",
-        "city": "Nijmegen"
-    },
-    {
-        "id": "2311",
-        "name": "AH Heuvelstraat",
-        "city": "Breda"
-    },
-    {
-        "id": "2405",
-        "name": "AH Burchtstraat",
-        "city": "Leiden"
-    },
-    {
-        "id": "2506",
-        "name": "AH Lange Delft",
-        "city": "Middelburg"
+        "id": "3134",
+        "name": "AH XL Haarlem",
+        "city": "Haarlem"
     },
     {
         "id": "2623",
@@ -130,54 +470,9 @@
         "city": "Kampen"
     },
     {
-        "id": "2701",
-        "name": "AH Marktstraat",
-        "city": "Apeldoorn"
-    },
-    {
-        "id": "2820",
-        "name": "AH Steenstraat",
-        "city": "Zwolle"
-    },
-    {
-        "id": "3005",
-        "name": "AH XL Maastricht",
-        "city": "Maastricht"
-    },
-    {
-        "id": "3012",
-        "name": "AH XL Arnhem",
-        "city": "Arnhem"
-    },
-    {
-        "id": "3024",
-        "name": "AH XL Amersfoort",
-        "city": "Amersfoort"
-    },
-    {
-        "id": "3034",
-        "name": "AH XL Delft",
-        "city": "Delft"
-    },
-    {
-        "id": "3042",
-        "name": "AH XL Dordrecht",
-        "city": "Dordrecht"
-    },
-    {
-        "id": "3051",
-        "name": "AH XL Enschede",
-        "city": "Enschede"
-    },
-    {
-        "id": "3089",
-        "name": "AH XL Zoetermeer",
-        "city": "Zoetermeer"
-    },
-    {
-        "id": "3105",
-        "name": "AH XL Alkmaar",
-        "city": "Alkmaar"
+        "id": "2405",
+        "name": "AH Burchtstraat",
+        "city": "Leiden"
     },
     {
         "id": "3112",
@@ -185,13 +480,58 @@
         "city": "Leiden"
     },
     {
-        "id": "3134",
-        "name": "AH XL Haarlem",
-        "city": "Haarlem"
+        "id": "3005",
+        "name": "AH XL Maastricht",
+        "city": "Maastricht"
     },
     {
-        "id": "3156",
-        "name": "AH XL Almere Stad",
-        "city": "Almere"
+        "id": "2506",
+        "name": "AH Lange Delft",
+        "city": "Middelburg"
+    },
+    {
+        "id": "2235",
+        "name": "AH Stationsplein",
+        "city": "Nijmegen"
+    },
+    {
+        "id": "1331",
+        "name": "AH Lijnbaan",
+        "city": "Rotterdam"
+    },
+    {
+        "id": "3003",
+        "name": "AH XL Rotterdam Alexander",
+        "city": "Rotterdam"
+    },
+    {
+        "id": "1910",
+        "name": "AH Nieuwstraat",
+        "city": "Tilburg"
+    },
+    {
+        "id": "1472",
+        "name": "AH Utrecht Centraal",
+        "city": "Utrecht"
+    },
+    {
+        "id": "1473",
+        "name": "AH Voorstraat",
+        "city": "Utrecht"
+    },
+    {
+        "id": "3060",
+        "name": "AH XL Utrecht Kanaleneiland",
+        "city": "Utrecht"
+    },
+    {
+        "id": "3089",
+        "name": "AH XL Zoetermeer",
+        "city": "Zoetermeer"
+    },
+    {
+        "id": "2820",
+        "name": "AH Steenstraat",
+        "city": "Zwolle"
     }
 ]

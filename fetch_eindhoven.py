@@ -74,15 +74,57 @@ def fetch_eindhoven_stores(token):
 if __name__ == "__main__":
     token = get_ah_token()
     if token:
-        stores = fetch_eindhoven_stores(token)
-        if stores:
-            # Transform to match expected format if needed, or just dump
-            # Existing keys in stores.json might be different?
-            # Let's save as stores.json directly for now or merge
-            
+        new_stores = fetch_eindhoven_stores(token)
+        if new_stores:
             output_path = os.path.join("static", "stores.json")
             
-            # Simple format: list of dicts
+            # Load existing stores
+            try:
+                with open(output_path, "r") as f:
+                    existing_stores = json.load(f)
+            except (FileNotFoundError, json.JSONDecodeError):
+                existing_stores = []
+                
+            # Create a lookup for existing stores (by ID as string)
+            store_map = {str(s.get("id")): s for s in existing_stores}
+            
+            # Process new stores
+            for s in new_stores:
+                sid = str(s["id"])
+                street = s["address"]["street"]
+                city = s["address"]["city"]
+                
+                # Format nice name: "AH [Street]"
+                # If the explicit name from API is wildly different (e.g. AH XL), we might want that
+                # But "AH [Street]" is a safe baseline matching user's "AH Woenselse Markt" style
+                # Simple heuristic: if name contains "XL", keep that, else construct
+                raw_name = s.get("name", "")
+                if "XL" in raw_name:
+                    nice_name = f"AH XL {street}"
+                else:
+                    nice_name = f"AH {street}"
+
+                # Construct enhanced store object
+                # Keep existing fields if we want, but prioritize new details
+                filtered_store = {
+                    "id": sid,
+                    "name": nice_name,
+                    "city": city,
+                    "address": s["address"],
+                    "geoLocation": s["geoLocation"]
+                }
+                
+                # Update or Add
+                store_map[sid] = filtered_store
+                
+            # Convert back to list and sort?
+            # Prefer keeping original order roughly, but map destroys order.
+            # Let's just create a new list: values of map
+            combined_stores = list(store_map.values())
+            
+            # Sort by City, then Name for neatness
+            combined_stores.sort(key=lambda x: (x.get("city", ""), x.get("name", "")))
+
             with open(output_path, "w") as f:
-                json.dump(stores, f, indent=2)
-            print(f"Saved to {output_path}")
+                json.dump(combined_stores, f, indent=4)
+            print(f"Updated {output_path} with {len(new_stores)} Eindhoven stores. Total: {len(combined_stores)}")

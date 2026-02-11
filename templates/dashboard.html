@@ -125,13 +125,17 @@
                 const search = document.getElementById('store-search');
                 select.value = selectedStoreId;
 
+                let debounceTimer;
                 search.addEventListener('input', (e) => {
-                    const searchTerm = e.target.value.toLowerCase();
-                    const filtered = stores.filter(s =>
-                        s.name.toLowerCase().includes(searchTerm) ||
-                        s.city.toLowerCase().includes(searchTerm)
-                    );
-                    renderStoreOptions(filtered);
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        const searchTerm = e.target.value.toLowerCase();
+                        const filtered = stores.filter(s =>
+                            s.name.toLowerCase().includes(searchTerm) ||
+                            s.city.toLowerCase().includes(searchTerm)
+                        );
+                        renderStoreOptions(filtered);
+                    }, 300);
                 });
 
                 select.addEventListener('change', (e) => {
