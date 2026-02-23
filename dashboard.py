@@ -3,9 +3,13 @@ import pandas as pd
 import numpy as np
 import uuid
 import time
-from flask import Flask, render_template, jsonify
+import os
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+from functools import wraps
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "super-secret-appie-key") # Voor sessies
+MASTER_PASSWORD = os.environ.get("MASTER_PASSWORD", "appie123") # Standaard wachtwoord
 
 
 # --- CONFIGURATION ---
@@ -632,13 +636,39 @@ def get_merged_data(store_id=None):
     
     return result
 
+# --- AUTH DECORATOR ---
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get("logged_in"):
+            return redirect(url_for("login", next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['password'] == MASTER_PASSWORD:
+            session['logged_in'] = True
+            return redirect(url_for('home'))
+        else:
+            error = 'Verkeerd wachtwoord. Probeer het opnieuw.'
+    return render_template('login.html', error=error)
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for('login'))
+
 @app.route('/')
+@login_required
 def home():
     return render_template('dashboard.html')
 
 @app.route('/api/data')
+@login_required
 def data():
-    from flask import request
     store_id = request.args.get('store_id', DEFAULT_STORE_ID)
     return jsonify(get_merged_data(store_id))
 
