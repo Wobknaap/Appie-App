@@ -445,6 +445,36 @@
         "city": "Enschede"
     },
     {
+        "id": "8773",
+        "name": "AH Burchtplein",
+        "city": "Etten-Leur",
+        "address": {
+            "street": "Burchtplein",
+            "houseNumber": "13",
+            "postalCode": "4873BS",
+            "city": "Etten-Leur"
+        },
+        "geoLocation": {
+            "latitude": 51.5684,
+            "longitude": 4.638348
+        }
+    },
+    {
+        "id": "5562",
+        "name": "AH Spoorlaan",
+        "city": "Etten-Leur",
+        "address": {
+            "street": "Spoorlaan",
+            "houseNumber": "129",
+            "postalCode": "4872XM",
+            "city": "Etten-Leur"
+        },
+        "geoLocation": {
+            "latitude": 51.575303,
+            "longitude": 4.637581
+        }
+    },
+    {
         "id": "3084",
         "name": "AH XL Geldrop",
         "city": "Geldrop"
