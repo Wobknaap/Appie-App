@@ -13,13 +13,3 @@ services:
       - key: PYTHON_VERSION
         value: 3.10.0
 
-  # Periodic Background Script (AH Sniper)
-  - type: cron
-    name: ah-sniper-daily
-    runtime: python
-    schedule: "0 8 * * *" # Every day at 8:00 AM UTC
-    buildCommand: pip install -r requirements.txt
-    startCommand: python ah_sniper.py
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.10.0
