@@ -8,13 +8,13 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("FLASK_SECRET_KEY", "super-secret-appie-key") # Voor sessies
-MASTER_PASSWORD = os.environ.get("MASTER_PASSWORD", "appie123") # Standaard wachtwoord
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "super-secret-appie-key")
+MASTER_PASSWORD = os.environ.get("MASTER_PASSWORD", "appie123")
 
 
-# --- CONFIGURATION ---
+# --- API CONFIGURATIE ---
 BASE_URL = "https://api.ah.nl"
-DEFAULT_STORE_ID = "1558"  # Woenselse Markt Eindhoven
+DEFAULT_STORE_ID = "1558"
 HEADERS = {
     "User-Agent": "Appie/9.28 (iPhone17,3; iPhone; CPU OS 26_1 like Mac OS X)",
     "x-application": "AHWEBSHOP",
@@ -34,17 +34,23 @@ NEGATIVE_KEYWORDS = [
 
 # Logic: If Meal Kit title contains KEY, look for matches in CATEGORY or KEYWORD
 MATCHING_RULES = {
-    'lasagne': {'keywords': ['gehakt', 'vega gehakt'], 'category': 'Vlees, kip, vis, vega'},
+    'lasagne': {'keywords': ['gehakt', 'vega gehakt', 'rundergehakt', 'biologisch rundergehakt'], 'category': 'Vlees, kip, vis, vega'},
+    'bolognese': {'keywords': ['gehakt', 'vega gehakt', 'rundergehakt', 'biologisch rundergehakt'], 'category': 'Vlees, kip, vis, vega'},
     'curry': {'keywords': ['kipfilet', 'kipdij', 'kipstukjes', 'tofu', 'vega stukjes'], 'category': 'Vlees, kip, vis, vega'},
     'madras': {'keywords': ['kipfilet', 'kipdij', 'kipstukjes', 'tofu'], 'category': 'Vlees, kip, vis, vega'},
     'tandoori': {'keywords': ['kipfilet', 'kipdij', 'kipstukjes'], 'category': 'Vlees, kip, vis, vega'},
     'soep': {'keywords': ['soepgroente', 'gehaktballetjes', 'stokbrood'], 'category': 'Groente'},
-    'pasta': {'keywords': ['gehakt', 'spekjes', 'kaas'], 'category': 'Vlees, kip, vis, vega'},
-    'risotto': {'keywords': ['paddenstoelen', 'kipfilet', 'kipdij', 'zalm'], 'category': 'Vlees, kip, vis, vega'},
+    'pasta': {'keywords': ['gehakt', 'spekjes', 'kaas', 'rundergehakt'], 'category': 'Vlees, kip, vis, vega'},
+    'spaghetti': {'keywords': ['gehakt', 'vega gehakt', 'rundergehakt', 'gehaktballetjes'], 'category': 'Vlees, kip, vis, vega'},
+    'fusilli': {'keywords': ['gehakt', 'spekjes', 'kaas', 'kipfilet'], 'category': 'Vlees, kip, vis, vega'},
+    'gnocchi': {'keywords': ['gehakt', 'spekjes', 'kipfilet', 'kaas', 'rundergehakt'], 'category': 'Vlees, kip, vis, vega'},
+    'risotto': {'keywords': ['paddenstoelen', 'kipfilet', 'kipdij', 'zalm', 'champignons', 'kastanjechampignons'], 'category': 'Vlees, kip, vis, vega'},
     'stamppot': {'keywords': ['rookworst', 'spekjes', 'gehaktbal'], 'category': 'Vlees, kip, vis, vega'},
     'chili': {'keywords': ['gehakt', 'vega gehakt'], 'category': 'Vlees, kip, vis, vega'},
     'wraps': {'keywords': ['kipfilet', 'kipdij', 'gehakt', 'vega reepjes'], 'category': 'Vlees, kip, vis, vega'},
-    'burrito': {'keywords': ['gehakt', 'kipfilet', 'kipdij', 'kipstukjes', 'bonen'], 'category': 'Vlees, kip, vis, vega'}
+    'burrito': {'keywords': ['gehakt', 'kipfilet', 'kipdij', 'kipstukjes', 'bonen'], 'category': 'Vlees, kip, vis, vega'},
+    'noodles': {'keywords': ['kipfilet', 'kipdij', 'kipstukjes', 'tofu', 'garnalen'], 'category': 'Vlees, kip, vis, vega'},
+    'roerbak': {'keywords': ['kipfilet', 'kipdij', 'kipstukjes', 'tofu', 'garnalen', 'varkenshaas'], 'category': 'Vlees, kip, vis, vega'},
 }
 
 # Simple in-memory cache

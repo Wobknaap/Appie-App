@@ -1,46 +1,74 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inloggen - Appie Sniper</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Appie Sniper — Inloggen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --ah-blue: #00ADE6;
-            --ah-light-bg: #F4F6F8;
-            --text-color: #1A1A1A;
+            --ah-dark-blue: #0081AC;
+            --ah-light-bg: #F0F2F5;
+            --text-color: #1A1A2E;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--ah-light-bg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--ah-light-bg) 0%, #dbeafe 50%, var(--ah-light-bg) 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 1rem;
         }
 
         .login-card {
             background: white;
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 3rem 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 130, 180, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05);
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             text-align: center;
         }
 
         .logo {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
         h1 {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+            font-size: 1.6rem;
+            margin: 0 0 0.5rem 0;
             color: var(--text-color);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: #6B7280;
+            font-size: 0.9rem;
+            margin: 0 0 2rem 0;
         }
 
         .form-group {
@@ -52,63 +80,90 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: #555;
+            color: #374151;
+            font-size: 0.9rem;
         }
 
         input[type="password"] {
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #eee;
-            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
             font-size: 1rem;
+            font-family: inherit;
             box-sizing: border-box;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #FAFBFC;
         }
 
         input[type="password"]:focus {
             outline: none;
             border-color: var(--ah-blue);
+            box-shadow: 0 0 0 3px rgba(0, 173, 230, 0.15);
+            background: white;
         }
 
         button {
             width: 100%;
-            padding: 0.75rem;
-            background-color: var(--ah-blue);
+            padding: 0.9rem;
+            background: linear-gradient(135deg, var(--ah-blue), var(--ah-dark-blue));
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.2s;
+            font-family: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.01em;
         }
 
         button:hover {
-            background-color: #0081AC;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 173, 230, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
         }
 
         .error {
             color: #E30613;
-            margin-top: 1rem;
-            font-size: 0.9rem;
+            margin-top: 1.25rem;
+            font-size: 0.85rem;
             font-weight: 600;
+            padding: 0.6rem;
+            background: #FEF2F2;
+            border-radius: 8px;
+            border: 1px solid #FEE2E2;
+        }
+
+        .footer-text {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #9CA3AF;
         }
     </style>
 </head>
+
 <body>
     <div class="login-card">
         <div class="logo">🐹</div>
-        <h1>Appie Sniper Login</h1>
+        <h1>Appie Sniper</h1>
+        <p class="subtitle">Vul het wachtwoord in om de deals te bekijken</p>
         <form method="POST">
             <div class="form-group">
-                <label for="password">Master Wachtwoord</label>
-                <input type="password" id="password" name="password" required autofocus>
+                <label for="password">Wachtwoord</label>
+                <input type="password" id="password" name="password" placeholder="Voer het wachtwoord in..." required
+                    autofocus>
             </div>
-            <button type="submit">Inloggen</button>
+            <button type="submit">🔐 Inloggen</button>
             {% if error %}
             <div class="error">{{ error }}</div>
             {% endif %}
         </form>
+        <p class="footer-text">Vraag het wachtwoord aan de beheerder</p>
     </div>
 </body>
+
 </html>

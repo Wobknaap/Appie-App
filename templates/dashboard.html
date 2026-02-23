@@ -4,54 +4,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appie Dashboard - Laatste Kans & Bonus</title>
+    <title>Appie Sniper — Jouw Koopjesradar</title>
+    <meta name="description"
+        content="Scoor de allerbeste Albert Heijn deals: Laatste Kans, Bonus-stacking en slimme verspakket-matches op één plek.">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
+    <!-- Header -->
     <header>
-        <h1><span class="logo-icon">🐹</span> Appie Sniper Dashboard</h1>
+        <div class="header-content">
+            <div class="header-left">
+                <h1><span class="logo-icon">🐹</span> Appie Sniper</h1>
+                <p class="header-subtitle">Jouw dagelijkse koopjesradar voor Albert Heijn</p>
+            </div>
+            <a href="/logout" class="logout-btn" title="Uitloggen">🔓 Uitloggen</a>
+        </div>
     </header>
 
     <main>
         <!-- Store Selector -->
-        <div style="background: white; padding: 1rem 2rem; margin-bottom: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-            <label for="store-select" style="font-weight: 600; margin-right: 1rem;">Selecteer je winkel:</label>
-            <input type="text" id="store-search" placeholder="Zoek winkel..."
-                style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; width: 300px; margin-right: 1rem;">
-            <select id="store-select"
-                style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; min-width: 300px; font-size: 1rem;">
-                <option value="">Aan het laden...</option>
-            </select>
+        <div class="store-selector">
+            <div class="store-selector-inner">
+                <div class="store-icon">📍</div>
+                <div class="store-fields">
+                    <label for="store-select">Kies jouw winkel</label>
+                    <div class="store-inputs">
+                        <input type="text" id="store-search" placeholder="Zoek op naam of stad...">
+                        <select id="store-select">
+                            <option value="">Aan het laden...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <!-- Loading State -->
         <div id="loading">
             <div class="spinner"></div>
-            <p>Koopjes ophalen bij de Appie...</p>
+            <p class="loading-text">Even geduld, we scannen de schappen... 🛒</p>
+            <p class="loading-subtext">De nieuwste deals worden voor je opgehaald</p>
         </div>
 
         <!-- Tab Navigation -->
-        <div id="tabs-container" style="display:none; margin-bottom: 2rem; justify-content: center; gap: 1rem;">
-            <button class="tab-button" onclick="switchTab('massa')">🚀 Massa = Kassa</button>
-            <button class="tab-button" onclick="switchTab('double')">🔥 Double Deals</button>
-            <button class="tab-button" onclick="switchTab('vers')">📦 Verspakketten</button>
-            <button class="tab-button" onclick="switchTab('kans')">🗑️ Laatste Kans</button>
+        <div id="tabs-container" style="display:none;">
+            <button class="tab-button" onclick="switchTab('massa')" id="tab-btn-massa">
+                <span class="tab-emoji">🚀</span>
+                <span class="tab-label">Massa = Kassa</span>
+            </button>
+            <button class="tab-button" onclick="switchTab('double')" id="tab-btn-double">
+                <span class="tab-emoji">🔥</span>
+                <span class="tab-label">Double Deals</span>
+            </button>
+            <button class="tab-button" onclick="switchTab('vers')" id="tab-btn-vers">
+                <span class="tab-emoji">🥦</span>
+                <span class="tab-label">Verspakketten</span>
+            </button>
+            <button class="tab-button" onclick="switchTab('kans')" id="tab-btn-kans">
+                <span class="tab-emoji">⏰</span>
+                <span class="tab-label">Laatste Kans</span>
+            </button>
         </div>
 
+        <!-- Content -->
         <div id="content" style="display: none;">
+
             <!-- Tab: Massa = Kassa -->
             <div id="tab-massa" class="tab-content">
                 <!-- Top 3 Podium -->
                 <section class="top3-section" id="top3-section" style="display:none;">
-                    <h2 style="text-align:center; font-size:2rem; margin-bottom:2rem;">🏆 Top 3 Beste Koopjes</h2>
+                    <div class="section-intro">
+                        <h2 class="section-title centered">🏆 Top 3 Beste Koopjes</h2>
+                        <p class="section-desc centered">De grootste besparingen van vandaag — pak ze voordat ze weg
+                            zijn!</p>
+                    </div>
                     <div class="podium" id="podium"></div>
                 </section>
 
                 <!-- Ultimate Stacking Section -->
                 <section class="stacking-section" id="stacking-section" style="display:none;">
-                    <h2 style="color: #6a00ff; border-left-color: #6a00ff;">🚀 Ultimate Stacking (Massa = Kassa)</h2>
+                    <div class="section-intro">
+                        <h2 class="section-title stacking">🚀 Massa = Kassa</h2>
+                        <p class="section-desc">Bonus + Laatste Kans gecombineerd! Koop meerdere stuks en bespaar
+                            maximaal.</p>
+                    </div>
                     <div id="stacking-container"></div>
                 </section>
             </div>
@@ -59,7 +97,11 @@
             <!-- Tab: Double Deals -->
             <div id="tab-double" class="tab-content" style="display:none;">
                 <section class="overlap-section">
-                    <h2>🔥 Double Deals (Bonus + Laatste Kans)</h2>
+                    <div class="section-intro">
+                        <h2 class="section-title double">🔥 Double Deals</h2>
+                        <p class="section-desc">Deze producten staan <strong>zowel in de Bonus als bij Laatste
+                                Kans</strong> — dubbele korting gegarandeerd!</p>
+                    </div>
                     <div id="overlap-container"></div>
                 </section>
             </div>
@@ -67,52 +109,52 @@
             <!-- Tab: Verspakketten -->
             <div id="tab-vers" class="tab-content" style="display:none;">
                 <section class="vers-section">
-                    <h2>📦 Verspakketten + Slimme Matches</h2>
-                    <p style="margin-bottom:1rem; color:#666;">Scoor een verspakket én de bijbehorende ingrediënten
-                        (vlees/vega) in de aanbieding!</p>
+                    <div class="section-intro">
+                        <h2 class="section-title vers">🥦 Verspakketten + Slimme Matches</h2>
+                        <p class="section-desc">Scoor een verspakket én de bijbehorende ingrediënten (vlees/vega) in de
+                            aanbieding. Wij zoeken de beste match voor je!</p>
+                    </div>
                     <div id="vers-container"></div>
                 </section>
             </div>
 
             <!-- Tab: Laatste Kans -->
             <div id="tab-kans" class="tab-content" style="display:none;">
-                <section>
-                    <h2>🗑️ Laatste Kans (Weg = Pech)</h2>
+                <section class="kans-section">
+                    <div class="section-intro">
+                        <h2 class="section-title kans">⏰ Laatste Kans</h2>
+                        <p class="section-desc">Producten die vandaag over datum gaan — flink afgeprijsd! Op = op, weg =
+                            pech.</p>
+                    </div>
                     <div id="bargains-container"></div>
                 </section>
             </div>
         </div>
     </main>
 
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>Gemaakt met 💙 — Prijzen worden live opgehaald bij Albert Heijn</p>
+    </footer>
+
     <script>
         let stores = [];
         let selectedStoreId = localStorage.getItem('selectedStore') || '1558';
+        let currentTab = 'massa';
 
         document.addEventListener('DOMContentLoaded', () => {
             loadStores();
             fetchData();
+            switchTab('massa');
         });
 
         function switchTab(tabName) {
-            // Hide all tabs
+            currentTab = tabName;
             document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
 
-            // Show selected
-            if (tabName === 'massa') {
-                document.getElementById('tab-massa').style.display = 'block';
-                // Only show Massa button active
-                document.querySelector('button[onclick="switchTab(\'massa\')"]').classList.add('active');
-            } else if (tabName === 'double') {
-                document.getElementById('tab-double').style.display = 'block';
-                document.querySelector('button[onclick="switchTab(\'double\')"]').classList.add('active');
-            } else if (tabName === 'vers') {
-                document.getElementById('tab-vers').style.display = 'block';
-                document.querySelector('button[onclick="switchTab(\'vers\')"]').classList.add('active');
-            } else if (tabName === 'kans') {
-                document.getElementById('tab-kans').style.display = 'block';
-                document.querySelector('button[onclick="switchTab(\'kans\')"]').classList.add('active');
-            }
+            document.getElementById('tab-' + tabName).style.display = 'block';
+            document.getElementById('tab-btn-' + tabName).classList.add('active');
         }
 
         async function loadStores() {
@@ -154,7 +196,7 @@
         function renderStoreOptions(storeList = stores) {
             const select = document.getElementById('store-select');
             select.innerHTML = storeList.map(store =>
-                `<option value="${store.id}">${store.name} - ${store.city}</option>`
+                `<option value="${store.id}">${store.name} — ${store.city}</option>`
             ).join('');
             if (selectedStoreId) select.value = selectedStoreId;
         }
@@ -169,35 +211,42 @@
                 // Ultimate Stacking
                 if (data.ultimate_stacks && data.ultimate_stacks.length > 0) {
                     document.getElementById('stacking-section').style.display = 'block';
-                    renderCategorized(data.ultimate_stacks, 'stacking-container', 'Geen stacks gevonden.');
+                    renderCategorized(data.ultimate_stacks, 'stacking-container', 'Vandaag geen stacking-mogelijkheden gevonden.');
                 } else {
                     document.getElementById('stacking-section').style.display = 'none';
                 }
 
-                // Categorized sections
-                renderCategorized(data.overlap, 'overlap-container', 'Geen dubbele deals gevonden vandaag.');
-                renderCategorized(data.bargains, 'bargains-container', 'Geen laatste kansjes gevonden.');
+                // Other sections
+                renderCategorized(data.overlap, 'overlap-container', 'Vandaag geen dubbele deals gevonden. Morgen beter!');
+                renderCategorized(data.bargains, 'bargains-container', 'Er zijn momenteel geen Laatste Kans producten beschikbaar.');
                 renderCategorized(data.meal_kits, 'vers-container', 'Geen verspakketten in de aanbieding gevonden.');
 
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
                 document.getElementById('tabs-container').style.display = 'flex';
 
+                switchTab(currentTab);
                 fireConfetti();
 
             } catch (error) {
-                document.getElementById('loading').innerHTML = `<p>❌ Fout: ${error.message}</p>`;
+                document.getElementById('loading').innerHTML = `
+                    <div class="error-state">
+                        <div style="font-size:3rem; margin-bottom:1rem;">😵</div>
+                        <p><strong>Oeps, er ging iets mis!</strong></p>
+                        <p style="color:#888;">${error.message}</p>
+                        <button onclick="location.reload()" class="retry-btn">Opnieuw proberen</button>
+                    </div>`;
             }
         }
 
         function fireConfetti() {
-            var duration = 3 * 1000;
+            var duration = 2.5 * 1000;
             var animationEnd = Date.now() + duration;
             var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
             var interval = setInterval(function () {
                 var timeLeft = animationEnd - Date.now();
                 if (timeLeft <= 0) return clearInterval(interval);
-                var particleCount = 50 * (timeLeft / duration);
+                var particleCount = 40 * (timeLeft / duration);
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random() * 0.2 + 0.1, y: Math.random() - 0.2 } }));
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random() * 0.2 + 0.7, y: Math.random() - 0.2 } }));
             }, 250);
@@ -235,17 +284,18 @@
 
             container.innerHTML = items.map((item, idx) => {
                 const title = item.Product || item.title;
-                const imgUrl = item.image_url || 'https://via.placeholder.com/150?text=Geen+Foto';
+                const imgUrl = item.image_url || '';
                 const savings = item.savings_euro || 0;
                 const wasPrice = item.final_was_price || 0;
                 const finalPrice = item.final_price || 0;
                 const stickerHtml = renderStickers(item);
+                const imgTag = imgUrl ? `<img src="${imgUrl}" alt="${title}" loading="lazy">` : `<div class="no-image">📦</div>`;
 
                 return `
                     <div class="podium-item ${ranks[idx]}">
                         <div class="podium-medal">${medals[idx]}</div>
                         <div class="podium-image-container">
-                            <img src="${imgUrl}" alt="${title}" loading="lazy">
+                            ${imgTag}
                         </div>
                         <h3 class="podium-title">${title}</h3>
                         <div class="price-container" style="align-items: center; margin: 0.5rem 0;">
@@ -264,35 +314,36 @@
         function createCard(item, isOverlap) {
             const title = item.Product || item.title;
             const brand = item.Merk || item.brand || 'AH';
-            const category = item.Categorie || item.categoryTitle || 'Diversen';
+            const category = item.Categorie || item.categoryTitle || item.category || item.Bonus_Groep || 'Diversen';
             let priceNow, priceWas;
             if (isOverlap) {
                 priceNow = item.final_price;
                 priceWas = item.final_was_price;
             } else {
-                priceNow = item.priceNow;
-                priceWas = item.priceWas;
+                priceNow = item.priceNow || item.Prijs_Nu;
+                priceWas = item.priceWas || item.Prijs_Was;
             }
 
             const stickerHtml = renderStickers(item);
             const unitSize = item.salesUnitSize ? `<div class="product-meta">${item.salesUnitSize}</div>` : '';
-            const imgUrl = item.image_url || 'https://via.placeholder.com/200?text=Geen+Foto';
+            const imgUrl = item.image_url || '';
+            const imgTag = imgUrl ? `<img src="${imgUrl}" alt="${title}" style="max-height:120px; max-width:100%; object-fit:contain;" loading="lazy">` : `<div class="no-image-card">📦</div>`;
 
             let stockHtml = '';
-            // Only show simpler stock indicator if NOT a stack (stacks use the big badge)
             if ((!item.stack_info || !item.stack_info.is_stack) && item.stock) {
-                stockHtml = `<div class="stock-indicator">⚠️ Nog ${item.stock} stuks!</div>`;
+                const urgency = item.stock <= 3 ? 'urgent' : '';
+                stockHtml = `<div class="stock-indicator ${urgency}">📦 Nog ${item.stock} stuks</div>`;
             }
 
-            // Stack Info (Bundle Savings)
+            // Stack Info
             let stackInfoHtml = '';
             if (item.stack_info && item.stack_info.is_stack) {
                 stackInfoHtml = `
-                    <div class="stack-badge" style="background:#f3eaff; color:#6a00ff; padding:0.75rem; border-radius:8px; margin-top:0.5rem; border:1px solid #d4b3ff;">
-                        <div style="font-weight:bold; font-size:1rem; margin-bottom:0.25rem;">${item.stack_info.stack_type}</div>
-                        <div style="font-size:0.9rem;">Koop ${item.stack_info.total_items}x voor <strong>€${formatPrice(item.stack_info.bundle_price)}</strong></div>
-                        <div style="font-size:0.85rem; color:#009000; font-weight:700; margin-top:0.25rem;">Jij bespaart: €${formatPrice(item.stack_info.bundle_savings)}!</div>
-                         <div style="font-size:0.75rem; color:#666; margin-top:0.25rem;">(Nog ${item.stock} op voorraad)</div>
+                    <div class="stack-badge">
+                        <div class="stack-type">${item.stack_info.stack_type}</div>
+                        <div class="stack-detail">Koop ${item.stack_info.total_items}x voor <strong>€${formatPrice(item.stack_info.bundle_price)}</strong></div>
+                        <div class="stack-savings">Bespaar €${formatPrice(item.stack_info.bundle_savings)}</div>
+                        <div class="stack-stock">📦 Nog ${item.stock} op voorraad</div>
                     </div>
                  `;
             }
@@ -317,8 +368,8 @@
 
             return `
                 <div class="card">
-                     <div class="card-image" style="text-align:center; padding-bottom:1rem;">
-                        <img src="${imgUrl}" alt="${title}" style="max-height:120px; max-width:100%; object-fit:contain;" loading="lazy">
+                     <div class="card-image">
+                        ${imgTag}
                     </div>
                     <div class="card-header">
                         <span class="category-tag">${category}</span>
@@ -350,7 +401,7 @@
                 return;
             }
             const grouped = items.reduce((acc, item) => {
-                const cat = item.Categorie || item.categoryTitle || 'Overige';
+                const cat = item.Categorie || item.categoryTitle || item.category || 'Overige';
                 if (!acc[cat]) acc[cat] = [];
                 acc[cat].push(item);
                 return acc;
@@ -365,7 +416,7 @@
             sortedCategories.forEach(cat => {
                 html += `
                     <div class="category-group">
-                        <h3 class="category-header">${cat} <span style="font-size:0.8em; color:#999; font-weight:400;">(${grouped[cat].length})</span></h3>
+                        <h3 class="category-header">${cat} <span class="cat-count">(${grouped[cat].length})</span></h3>
                         <div class="grid">
                             ${grouped[cat].map(item => createCard(item, isOverlap)).join('')}
                         </div>
